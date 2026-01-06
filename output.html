@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gormleyBagger</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      }
+
+canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      }
+
+#map { position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:0; 
+}
+
+/*map table layer*/
+#sidebar-layer {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 97.5%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd; 
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 10px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+    transition: transform 0.5s ease;
+    }
+
+#sidebar-table td button {
+    cursor: pointer;
+    text-align: left;
+    vertical-align: top;
+    white-space: normal; 
+    width: 100%;
+    width: 125px;
+    }
+
+button {
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: black;
+    cursor: pointer;
+    }
+    
+button:hover {
+  filter: brightness(90%);
+  cursor: pointer;
+}
+
+#searchInput::placeholder {
+    text-align: right;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <div id="sidebar-layer">
+    <table id="sidebar-table">
+      <thead style="position: fixed; top: 0; background: white; z-index: 1000;">
+        <th style="text-align: left; width: 125px">
+          Name<br>
+          <input type="text" id="searchInput" placeholder="🔎" style="width: 100px; text-align: left;">
+        </th>
+      </thead>
+      <tbody style="display: block; margin-top: 30px;">
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(55.95008363, -3.228595934)">
+              6 Times (Figure I)
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(55.95118355, -3.225297946)">
+              7 Times (Figure II)
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(55.95819491, -3.208878658)">
+              8 Times (Figure IIII)
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(55.96759562, -3.194258808)">
+              9 Times (Figure IV)
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(55.97192991, -3.183396928)">
+              10 Times (Figure V)
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(55.98427299, -3.176415874)">
+              11 Times (Figure VI)
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.756083, -1.25525)">
+              A Door for the Stuart Gates
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(55.673426, 14.241283)">
+              A Sculpture for the Subjective Experience of Architecture
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.498922, -0.174722)">
+              Alert
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(24.660726, -100.4203)">
+              Allotment III
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(54.9141254, -1.5916828)">
+              Angel of the North
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(53.4909747, -3.0605476)">
+              Another Place
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(37.07268, 138.77664)">
+              Another Singularity
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.4814724, -1.0775022)">
+              Another Time
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(56.4624148, -3.0428533)">
+              Another Time X
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.75425558, -1.256482826)">
+              Another Time XI
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.5089923, -0.03449)">
+              Another Time XVI
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.07673068, 1.191638036)">
+              Another Time XVIII
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(33.6277222, 131.6034167)">
+              Another Time XX
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(48.1323, 11.5983369)">
+              Bare V
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(34.840583, 128.429818)">
+              Bearing III
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(58.9704986, 5.7303649)">
+              Broken Column
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(42.3631626, -71.0926482)">
+              Chord
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(48.8599697, 2.3572959)">
+              Cloud Chain
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.5047889, -0.2003235)">
+              Connect
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(1.2846547, 103.8609937)">
+              Drift
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(52.521953, 5.4253192)">
+              Exposure
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(43.4685584, 11.1376636)">
+              Fai Spazio, Prendi Posto (Making Space, Taking Place)
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.526033, -0.134058)">
+              Feel
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(55.900743, -3.421232)">
+              Firmament
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(55.5268525, -5.5014542)">
+              Grip
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(37.41912289857986, 127.8232613208938)">
+              Ground
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(61.2163051, -149.8884068)">
+              Habitat
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(66.3101601, 14.1274651)">
+              Havmann
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(56.199503, 12.557791)">
+              Here and Here
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(34.1751492, 135.4602919)">
+              Here and There
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(-29.4611752, 120.749213)">
+              Inside Australia
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(52.4789949, -1.904861)">
+              Iron:Man
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.052639, 13.736667)">
+              Learning to See III and Under My Skin
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(52.208466, 0.124341)">
+              Learning to See VI
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(50.363074934784166, -4.147002013961376)">
+              Look II
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.6058236, -0.4831649)">
+              Making Space
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(37.3695, 138.8965)">
+              Man:Rock V
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(48.1394124, 11.5689943)">
+              Mark II
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(34.699087, 135.491727)">
+              Mind-Body Column
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(48.1033938, -1.6878374)">
+              Open Space
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.3168624, 9.5000296)">
+              Out of the Dark
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(49.6313504, 3.1787161)">
+              Passage
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(59.9043812, 10.7375367)">
+              Place of Remembrance
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(52.57274679, -0.2448478056)">
+              Places to Be #1
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(52.57241425, -0.2424552752)">
+              Places to Be #2
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(52.57330103, -0.2436890913)">
+              Places to Be #3
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.5299996, -0.1280864)">
+              Planets
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(52.2027, 0.1219)">
+              Plant
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.5018139, 0.0091839)">
+              Quantum Cloud
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.5244224, -0.1440789)">
+              Reflection
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.51584628, -0.106283141)">
+              Resolution
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(38.7672471, -9.094888)">
+              Rhizome II
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.5128465, -0.1523666)">
+              Room
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(37.4005, 25.2682)">
+              Rule II
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(54.9955757, -7.3191791)">
+              Sculpture for Derry Walls
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(38.91728, 16.58325)">
+              Seven Times
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(22.287191, 114.210539)">
+              Shelf II
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(45.037533, 6.284781)">
+              Site
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.0606892, -1.3131538)">
+              Sound II
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(61.1122823, 10.4387637)">
+              Standing Matter XVII
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(-43.5282527, 172.6287084)">
+              Stay
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(-43.5307273, 172.6287776)">
+              Stay
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(52.5183242, 13.3788813)">
+              Steht Und Fällt
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(50.5507395, -2.4465833)">
+              Still Falling
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.2797971, 1.0827998)">
+              Transport
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(52.203849, 0.115856)">
+              True, for Alan Turing
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.2801057, 0.5179559)">
+              Two Stones
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.5485714, -0.1985727)">
+              Untitled [Listening]
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.5299996, -0.1275392)">
+              Witness
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(48.8609973, 2.3296885)">
+              Witness VII
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(48.8610044, 2.3311208)">
+              Witness VIII
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(53.693127, -1.6599717)">
+              Work
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button  onclick="goToLocation(51.543447, -0.1521035)">
+              You
+            </button>
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <script>
+    // init map
+    var map = L.map('map', {
+      center: [51.5074, 0.1272],
+      zoom: 5,
+      minZoom: 2,
+      maxZoom: 13,
+      zoomControl: false 
+    });
+
+    // openstreet map layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    window.layerGroup = L.layerGroup().addTo(map);
+    window.map = map;
+
+    gapIcon = L.icon({
+      iconUrl: '../static/images/gap.png',
+      iconSize: [18, 18],
+      iconAnchor: [10, 10],
+      popupAnchor: [0, -10]
+    });
+
+    
+       
+      var marker = L.marker([55.95008363, -3.228595934], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([55.95118355, -3.225297946], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([55.95819491, -3.208878658], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([55.96759562, -3.194258808], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([55.97192991, -3.183396928], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([55.98427299, -3.176415874], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.756083, -1.25525], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([55.673426, 14.241283], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.498922, -0.174722], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([24.660726, -100.4203], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([54.9141254, -1.5916828], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([53.4909747, -3.0605476], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([37.07268, 138.77664], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.4814724, -1.0775022], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([56.4624148, -3.0428533], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.75425558, -1.256482826], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.5089923, -0.03449], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.07673068, 1.191638036], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([33.6277222, 131.6034167], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([48.1323, 11.5983369], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([34.840583, 128.429818], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([58.9704986, 5.7303649], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([42.3631626, -71.0926482], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([48.8599697, 2.3572959], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.5047889, -0.2003235], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([1.2846547, 103.8609937], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([52.521953, 5.4253192], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([43.4685584, 11.1376636], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.526033, -0.134058], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([55.900743, -3.421232], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([55.5268525, -5.5014542], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([37.41912289857986, 127.8232613208938], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([61.2163051, -149.8884068], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([66.3101601, 14.1274651], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([56.199503, 12.557791], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([34.1751492, 135.4602919], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([-29.4611752, 120.749213], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([52.4789949, -1.904861], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.052639, 13.736667], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([52.208466, 0.124341], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([50.363074934784166, -4.147002013961376], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.6058236, -0.4831649], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([37.3695, 138.8965], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([48.1394124, 11.5689943], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([34.699087, 135.491727], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([48.1033938, -1.6878374], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.3168624, 9.5000296], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([49.6313504, 3.1787161], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([59.9043812, 10.7375367], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([52.57274679, -0.2448478056], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([52.57241425, -0.2424552752], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([52.57330103, -0.2436890913], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.5299996, -0.1280864], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([52.2027, 0.1219], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.5018139, 0.0091839], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.5244224, -0.1440789], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.51584628, -0.106283141], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([38.7672471, -9.094888], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.5128465, -0.1523666], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([37.4005, 25.2682], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([54.9955757, -7.3191791], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([38.91728, 16.58325], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([22.287191, 114.210539], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([45.037533, 6.284781], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.0606892, -1.3131538], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([61.1122823, 10.4387637], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([-43.5282527, 172.6287084], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([-43.5307273, 172.6287776], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([52.5183242, 13.3788813], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([50.5507395, -2.4465833], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.2797971, 1.0827998], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([52.203849, 0.115856], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.2801057, 0.5179559], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.5485714, -0.1985727], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.5299996, -0.1275392], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([48.8609973, 2.3296885], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([48.8610044, 2.3311208], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([53.693127, -1.6599717], { icon: gapIcon }).addTo(map);
+
+    
+       
+      var marker = L.marker([51.543447, -0.1521035], { icon: gapIcon }).addTo(map);
+
+    
+  </script>
+
+  <script>
+    //navigate to button coords and show circle
+    async function goToLocation(lat, lng) {
+      const coords = [lat, lng - 0.002];
+
+      window.map.setView(coords, 13);
+
+      // small delay to ensure view updates
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      if (!window.map.getPane('overlayTop')) {
+          window.map.createPane('overlayTop');
+          window.map.getPane('overlayTop').style.zIndex = 650;
+          window.map.getPane('overlayTop').style.pointerEvents = 'none';
+      }
+
+      const circle = L.circle(coords, {
+          color: 'red',
+          fillColor: '#f03',
+          fillOpacity: 0,
+          radius: 150
+      }).addTo(window.map);
+
+      // wait 1.5 seconds before removing
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      window.map.removeLayer(circle);
+      }
+  </script>
+
+<script>
+  //search table
+  const searchInput = document.getElementById('searchInput');
+  const rows = document.querySelectorAll('#sidebar-table tbody tr');
+
+  searchInput.addEventListener('input', function () {
+      const filter = searchInput.value.toLowerCase();
+      rows.forEach(row => {
+      const nameText = row.cells[0].textContent.toLowerCase();
+      row.style.display = nameText.includes(filter) ? '' : 'none';
+      });
+  });
+</script>
+</body>
+
+</html>
