@@ -136,9 +136,20 @@ button:hover {
       popupAnchor: [20, 8]
     });
 
+    bagIcon = L.icon({
+      iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/matthew.png?raw=true',
+      iconSize: [16, 16],
+      iconAnchor: [32, 8],
+      popupAnchor: [20, 8]
+    });
+
     {% for loc in data %}
-       
+
+    {% if loc.status == '1' %}
+      var marker = L.marker([{{ loc.latitude }}, {{ loc.longitude }}], { icon: bagIcon }).addTo(map);
+    {% else %}
       var marker = L.marker([{{ loc.latitude }}, {{ loc.longitude }}], { icon: gapIcon }).addTo(map);
+    {% endif %}
 
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip({{ loc.name | tojson }}, {
