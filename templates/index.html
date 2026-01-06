@@ -5,6 +5,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }}</title>
+  <link rel="icon" href='https://github.com/mprallison/gormley-bagger/blob/main/static/images/gap.png?raw=true' type="image/png" sizes="48x48">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -16,63 +17,63 @@
       overflow: hidden;
       }
 
-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      }
+    canvas {
+          position: absolute;
+          top: 0;
+          left: 0;
+          pointer-events: none;
+          }
 
-#map { position: absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:0; 
-}
+    #map { 
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        z-index:0; 
+        }
 
-/*map table layer*/
-#sidebar-layer {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 150px;
-    height: 97.5%;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ddd; 
-    z-index: 1000;
-    overflow-y: auto;
-    padding: 10px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-    transition: transform 0.5s ease;
+    /*map table layer*/
+    #sidebar-layer {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 150px;
+        height: 97.5%;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid #ddd; 
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 10px;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        transition: transform 0.5s ease;
+        }
+
+    #sidebar-table td button {
+        cursor: pointer;
+        text-align: left;
+        vertical-align: top;
+        white-space: normal; 
+        width: 100%;
+        width: 125px;
+        }
+
+    button {
+        border-radius: 6px;
+        border-width: 1px;
+        border-color: black;
+        cursor: pointer;
+        }
+        
+    button:hover {
+      filter: brightness(90%);
+      cursor: pointer;
     }
 
-#sidebar-table td button {
-    cursor: pointer;
-    text-align: left;
-    vertical-align: top;
-    white-space: normal; 
-    width: 100%;
-    width: 125px;
-    }
-
-button {
-    border-radius: 6px;
-    border-width: 1px;
-    border-color: black;
-    cursor: pointer;
-    }
-    
-button:hover {
-  filter: brightness(90%);
-  cursor: pointer;
-}
-
-#searchInput::placeholder {
-    text-align: right;
-    }
-
+    #searchInput::placeholder {
+        text-align: right;
+        }
   </style>
 </head>
 
@@ -126,31 +127,36 @@ button:hover {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
+    //add map layer
     window.layerGroup = L.layerGroup().addTo(map);
     window.map = map;
 
+    //icon for empty status
     gapIcon = L.icon({
-      iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/Untitled_.png?raw=true',
-      iconSize: [18, 18],
-      iconAnchor: [10, 10],
-      popupAnchor: [0, -10]
+    iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/gap.png?raw=true',
+    iconSize: [18, 18],
+    iconAnchor: [20, 9],
+    popupAnchor: [0, -10]
     });
 
+    //icon for bagged status
     bagIcon = L.icon({
-      iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/matthew.png?raw=true',
-      iconSize: [18, 18],
-      iconAnchor: [10, 10],
-      popupAnchor: [0, -10]
+    iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/matthew.png?raw=true',
+    iconSize: [18, 18],
+    iconAnchor: [20, 9],
+    popupAnchor: [0, -10]
     });
 
+    //populate icons
     {% for loc in data %}
 
-    {% if loc.status == '1' %}
-      var marker = L.marker([{{ loc.latitude }}, {{ loc.longitude }}], { icon: bagIcon }).addTo(map);
-    {% else %}
-      var marker = L.marker([{{ loc.latitude }}, {{ loc.longitude }}], { icon: gapIcon }).addTo(map);
-    {% endif %}
+      {% if loc.status == '1' %}
+        var marker = L.marker([{{ loc.latitude }}, {{ loc.longitude }}], { icon: bagIcon }).addTo(map);
+      {% else %}
+        var marker = L.marker([{{ loc.latitude }}, {{ loc.longitude }}], { icon: gapIcon }).addTo(map);
+      {% endif %}
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip({{ loc.name | tojson }}, {
         permanent: false,
@@ -158,7 +164,40 @@ button:hover {
         offset: [-10, -4]
         })
         };
+      
+      //add onclick popup
+      marker.on('click', function (e) {
+          //add popup
+          const popupContent = `
+          <div style="max-width: 250px;">
+        <h3 style="margin: 0; text-align: center;">{{ loc.name }}</h3>
+        <p style="margin: 0; font-size: 12px; text-align: center;">
+          <a href="{{ loc.url }}" target="_blank">sculpture page</a>
+        </p>
+        <br>
 
+        <div style="
+          display: grid;
+          grid-template-columns: max-content 1fr;
+          row-gap: 4px;
+          column-gap: 8px;
+          font-size: 13px;
+          margin-left: 10px;
+          ">
+
+          <strong>Year:</strong>
+          <span>{{ loc.year }}</span>
+
+          <strong>Location:</strong>
+          <span>{{ loc.location }}</span>
+        </div>
+        `;
+
+          L.popup()
+            .setLatLng(e.latlng)
+            .setContent(popupContent)
+            .openOn(map);
+        });
     {% endfor %}
   </script>
 

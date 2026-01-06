@@ -10,9 +10,11 @@ with open("data.csv", mode="r", encoding="utf-8") as csv_file:
 
 #declare title
 title = "gormleyBagger"
+filename = "gormley_map.html"
 
+#render template
 template = env.get_template("index.html")
 html = template.render(title=title, data=data)
 
-with open("output.html", "w", encoding="utf-8") as f:
+with open(filename, "w", encoding="utf-8") as f:
     f.write(html)

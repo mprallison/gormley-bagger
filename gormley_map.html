@@ -5,6 +5,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>gormleyBagger</title>
+  <link rel="icon" href='https://github.com/mprallison/gormley-bagger/blob/main/static/images/gap.png?raw=true' type="image/png" sizes="48x48">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -16,63 +17,63 @@
       overflow: hidden;
       }
 
-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      }
+    canvas {
+          position: absolute;
+          top: 0;
+          left: 0;
+          pointer-events: none;
+          }
 
-#map { position: absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:0; 
-}
+    #map { 
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        z-index:0; 
+        }
 
-/*map table layer*/
-#sidebar-layer {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 150px;
-    height: 97.5%;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ddd; 
-    z-index: 1000;
-    overflow-y: auto;
-    padding: 10px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-    transition: transform 0.5s ease;
+    /*map table layer*/
+    #sidebar-layer {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 150px;
+        height: 97.5%;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid #ddd; 
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 10px;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        transition: transform 0.5s ease;
+        }
+
+    #sidebar-table td button {
+        cursor: pointer;
+        text-align: left;
+        vertical-align: top;
+        white-space: normal; 
+        width: 100%;
+        width: 125px;
+        }
+
+    button {
+        border-radius: 6px;
+        border-width: 1px;
+        border-color: black;
+        cursor: pointer;
+        }
+        
+    button:hover {
+      filter: brightness(90%);
+      cursor: pointer;
     }
 
-#sidebar-table td button {
-    cursor: pointer;
-    text-align: left;
-    vertical-align: top;
-    white-space: normal; 
-    width: 100%;
-    width: 125px;
-    }
-
-button {
-    border-radius: 6px;
-    border-width: 1px;
-    border-color: black;
-    cursor: pointer;
-    }
-    
-button:hover {
-  filter: brightness(90%);
-  cursor: pointer;
-}
-
-#searchInput::placeholder {
-    text-align: right;
-    }
-
+    #searchInput::placeholder {
+        text-align: right;
+        }
   </style>
 </head>
 
@@ -900,29 +901,34 @@ button:hover {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
+    //add map layer
     window.layerGroup = L.layerGroup().addTo(map);
     window.map = map;
 
+    //icon for empty status
     gapIcon = L.icon({
-      iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/Untitled_.png?raw=true',
+    iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/gap.png?raw=true',
     iconSize: [18, 18],
     iconAnchor: [20, 9],
     popupAnchor: [0, -10]
     });
 
+    //icon for bagged status
     bagIcon = L.icon({
-      iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/matthew.png?raw=true',
+    iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/matthew.png?raw=true',
     iconSize: [18, 18],
     iconAnchor: [20, 9],
     popupAnchor: [0, -10]
     });
 
+    //populate icons
     
 
       
         var marker = L.marker([55.95008363, -3.228595934], { icon: bagIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("6 Times (Figure I)", {
         permanent: false,
@@ -930,8 +936,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -964,14 +970,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([55.95118355, -3.225297946], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("7 Times (Figure II)", {
         permanent: false,
@@ -979,8 +984,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1013,14 +1018,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([55.95819491, -3.208878658], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("8 Times (Figure IIII)", {
         permanent: false,
@@ -1028,8 +1032,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1062,14 +1066,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([55.96759562, -3.194258808], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("9 Times (Figure IV)", {
         permanent: false,
@@ -1077,8 +1080,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1111,14 +1114,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([55.97192991, -3.183396928], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("10 Times (Figure V)", {
         permanent: false,
@@ -1126,8 +1128,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1160,14 +1162,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([55.98427299, -3.176415874], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("11 Times (Figure VI)", {
         permanent: false,
@@ -1175,8 +1176,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1209,14 +1210,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.756083, -1.25525], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("A Door for the Stuart Gates", {
         permanent: false,
@@ -1224,8 +1224,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1258,14 +1258,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([55.673426, 14.241283], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("A Sculpture for the Subjective Experience of Architecture", {
         permanent: false,
@@ -1273,8 +1272,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1307,14 +1306,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.498922, -0.174722], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Alert", {
         permanent: false,
@@ -1322,8 +1320,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1356,14 +1354,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([24.660726, -100.4203], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Allotment III", {
         permanent: false,
@@ -1371,8 +1368,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1405,14 +1402,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([54.9141254, -1.5916828], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Angel of the North", {
         permanent: false,
@@ -1420,8 +1416,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1454,14 +1450,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([53.4909747, -3.0605476], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Another Place", {
         permanent: false,
@@ -1469,8 +1464,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1503,14 +1498,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([37.07268, 138.77664], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Another Singularity", {
         permanent: false,
@@ -1518,8 +1512,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1552,14 +1546,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.39238922979265, 1.3816145129625068], { icon: bagIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Another Time", {
         permanent: false,
@@ -1567,8 +1560,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1601,14 +1594,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([56.4624148, -3.0428533], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Another Time X", {
         permanent: false,
@@ -1616,8 +1608,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1650,14 +1642,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.75425558, -1.256482826], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Another Time XI", {
         permanent: false,
@@ -1665,8 +1656,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1699,14 +1690,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.5089923, -0.03449], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Another Time XVI", {
         permanent: false,
@@ -1714,8 +1704,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1748,14 +1738,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.07673068, 1.191638036], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Another Time XVIII", {
         permanent: false,
@@ -1763,8 +1752,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1797,14 +1786,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([33.6277222, 131.6034167], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Another Time XX", {
         permanent: false,
@@ -1812,8 +1800,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1846,14 +1834,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([48.1323, 11.5983369], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Bare V", {
         permanent: false,
@@ -1861,8 +1848,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1895,14 +1882,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([34.840583, 128.429818], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Bearing III", {
         permanent: false,
@@ -1910,8 +1896,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1944,14 +1930,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([58.9704986, 5.7303649], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Broken Column", {
         permanent: false,
@@ -1959,8 +1944,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -1993,14 +1978,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([42.3631626, -71.0926482], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Chord", {
         permanent: false,
@@ -2008,8 +1992,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2042,14 +2026,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([48.8599697, 2.3572959], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Cloud Chain", {
         permanent: false,
@@ -2057,8 +2040,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2091,14 +2074,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.5047889, -0.2003235], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Connect", {
         permanent: false,
@@ -2106,8 +2088,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2140,14 +2122,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([1.2846547, 103.8609937], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Drift", {
         permanent: false,
@@ -2155,8 +2136,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2189,14 +2170,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([52.521953, 5.4253192], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Exposure", {
         permanent: false,
@@ -2204,8 +2184,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2238,14 +2218,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([43.4685584, 11.1376636], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Fai Spazio, Prendi Posto (Making Space, Taking Place)", {
         permanent: false,
@@ -2253,8 +2232,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2287,14 +2266,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.526033, -0.134058], { icon: bagIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Feel", {
         permanent: false,
@@ -2302,8 +2280,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2336,14 +2314,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([55.900743, -3.421232], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Firmament", {
         permanent: false,
@@ -2351,8 +2328,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2385,14 +2362,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([55.5268525, -5.5014542], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Grip", {
         permanent: false,
@@ -2400,8 +2376,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2434,14 +2410,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([37.41912289857986, 127.8232613208938], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Ground", {
         permanent: false,
@@ -2449,8 +2424,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2483,14 +2458,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([61.2163051, -149.8884068], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Habitat", {
         permanent: false,
@@ -2498,8 +2472,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2532,14 +2506,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([66.3101601, 14.1274651], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Havmann", {
         permanent: false,
@@ -2547,8 +2520,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2581,14 +2554,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([56.199503, 12.557791], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Here and Here", {
         permanent: false,
@@ -2596,8 +2568,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2630,14 +2602,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([34.1751492, 135.4602919], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Here and There", {
         permanent: false,
@@ -2645,8 +2616,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2679,14 +2650,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([-29.4611752, 120.749213], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Inside Australia", {
         permanent: false,
@@ -2694,8 +2664,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2728,14 +2698,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([52.4789949, -1.904861], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Iron:Man", {
         permanent: false,
@@ -2743,8 +2712,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2777,14 +2746,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.052639, 13.736667], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Learning to See III and Under My Skin", {
         permanent: false,
@@ -2792,8 +2760,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2826,14 +2794,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([52.208466, 0.124341], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Learning to See VI", {
         permanent: false,
@@ -2841,8 +2808,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2875,14 +2842,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([50.363074934784166, -4.147002013961376], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Look II", {
         permanent: false,
@@ -2890,8 +2856,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2924,14 +2890,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.6058236, -0.4831649], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Making Space", {
         permanent: false,
@@ -2939,8 +2904,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -2973,14 +2938,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([37.3695, 138.8965], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Man:Rock V", {
         permanent: false,
@@ -2988,8 +2952,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3022,14 +2986,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([48.1394124, 11.5689943], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Mark II", {
         permanent: false,
@@ -3037,8 +3000,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3071,14 +3034,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([34.699087, 135.491727], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Mind-Body Column", {
         permanent: false,
@@ -3086,8 +3048,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3120,14 +3082,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([48.1033938, -1.6878374], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Open Space", {
         permanent: false,
@@ -3135,8 +3096,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3169,14 +3130,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.3168624, 9.5000296], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Out of the Dark", {
         permanent: false,
@@ -3184,8 +3144,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3218,14 +3178,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([49.6313504, 3.1787161], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Passage", {
         permanent: false,
@@ -3233,8 +3192,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3267,14 +3226,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([59.9043812, 10.7375367], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Place of Remembrance", {
         permanent: false,
@@ -3282,8 +3240,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3316,14 +3274,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([52.57274679, -0.2448478056], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Places to Be #1", {
         permanent: false,
@@ -3331,8 +3288,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3365,14 +3322,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([52.57241425, -0.2424552752], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Places to Be #2", {
         permanent: false,
@@ -3380,8 +3336,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3414,14 +3370,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([52.57330103, -0.2436890913], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Places to Be #3", {
         permanent: false,
@@ -3429,8 +3384,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3463,14 +3418,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.5299996, -0.1280864], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Planets", {
         permanent: false,
@@ -3478,8 +3432,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3512,14 +3466,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([52.2027, 0.1219], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Plant", {
         permanent: false,
@@ -3527,8 +3480,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3561,14 +3514,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.5018139, 0.0091839], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Quantum Cloud", {
         permanent: false,
@@ -3576,8 +3528,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3610,14 +3562,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.5244224, -0.1440789], { icon: bagIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Reflection", {
         permanent: false,
@@ -3625,8 +3576,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3659,14 +3610,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.51584628, -0.106283141], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Resolution", {
         permanent: false,
@@ -3674,8 +3624,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3708,14 +3658,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([38.7672471, -9.094888], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Rhizome II", {
         permanent: false,
@@ -3723,8 +3672,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3757,14 +3706,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.5128465, -0.1523666], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Room", {
         permanent: false,
@@ -3772,8 +3720,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3806,14 +3754,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([37.4005, 25.2682], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Rule II", {
         permanent: false,
@@ -3821,8 +3768,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3855,14 +3802,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([54.9955757, -7.3191791], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Sculpture for Derry Walls", {
         permanent: false,
@@ -3870,8 +3816,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3904,14 +3850,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([38.91728, 16.58325], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Seven Times", {
         permanent: false,
@@ -3919,8 +3864,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -3953,14 +3898,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([22.287191, 114.210539], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Shelf II", {
         permanent: false,
@@ -3968,8 +3912,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4002,14 +3946,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([45.037533, 6.284781], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Site", {
         permanent: false,
@@ -4017,8 +3960,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4051,14 +3994,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.0606892, -1.3131538], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Sound II", {
         permanent: false,
@@ -4066,8 +4008,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4100,14 +4042,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([61.1122823, 10.4387637], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Standing Matter XVII", {
         permanent: false,
@@ -4115,8 +4056,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4149,14 +4090,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([-43.5282527, 172.6287084], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Stay", {
         permanent: false,
@@ -4164,8 +4104,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4198,14 +4138,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([-43.5307273, 172.6287776], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Stay", {
         permanent: false,
@@ -4213,8 +4152,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4247,14 +4186,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([52.5183242, 13.3788813], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Steht Und F\u00e4llt", {
         permanent: false,
@@ -4262,8 +4200,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4296,14 +4234,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([50.5507395, -2.4465833], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Still Falling", {
         permanent: false,
@@ -4311,8 +4248,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4345,14 +4282,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.2797971, 1.0827998], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Transport", {
         permanent: false,
@@ -4360,8 +4296,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4394,14 +4330,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([52.203849, 0.115856], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("True, for Alan Turing", {
         permanent: false,
@@ -4409,8 +4344,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4443,14 +4378,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.2801057, 0.5179559], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Two Stones", {
         permanent: false,
@@ -4458,8 +4392,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4492,14 +4426,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.5485714, -0.1985727], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Untitled [Listening]", {
         permanent: false,
@@ -4507,8 +4440,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4541,14 +4474,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.5299996, -0.1275392], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Witness", {
         permanent: false,
@@ -4556,8 +4488,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4590,14 +4522,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([48.8609973, 2.3296885], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Witness VII", {
         permanent: false,
@@ -4605,8 +4536,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4639,14 +4570,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([48.8610044, 2.3311208], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Witness VIII", {
         permanent: false,
@@ -4654,8 +4584,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4688,14 +4618,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([53.693127, -1.6599717], { icon: gapIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("Work", {
         permanent: false,
@@ -4703,8 +4632,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4737,14 +4666,13 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
 
       
         var marker = L.marker([51.543447, -0.1521035], { icon: bagIcon }).addTo(map);
       
 
+      //hover tooltip if not mobile
       if (window.matchMedia('(hover: hover)').matches) {
         marker.bindTooltip("You", {
         permanent: false,
@@ -4752,8 +4680,8 @@ button:hover {
         offset: [-10, -4]
         })
         };
-
-
+      
+      //add onclick popup
       marker.on('click', function (e) {
           //add popup
           const popupContent = `
@@ -4786,8 +4714,6 @@ button:hover {
             .setContent(popupContent)
             .openOn(map);
         });
-      
-
     
   </script>
 
