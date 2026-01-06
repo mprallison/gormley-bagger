@@ -90,11 +90,19 @@ button:hover {
       <tbody style="display: block; margin-top: 30px;">
         {% for loc in data %}
         <tr>
+          {% if loc.status == '1' %}
           <td>
-            <button {{ loc.style|e }} onclick="goToLocation({{ loc.latitude }}, {{ loc.longitude }})">
+            <button style = "background-color: #93C572;" onclick="goToLocation({{ loc.latitude }}, {{ loc.longitude }})">
               {{ loc.name }}
             </button>
           </td>
+          {% else %}
+          <td>
+          <button onclick="goToLocation({{ loc.latitude }}, {{ loc.longitude }})">
+              {{ loc.name }}
+            </button>
+          </td>
+          {% endif %}
         </tr>
         {% endfor %}
       </tbody>
@@ -109,7 +117,7 @@ button:hover {
       center: [51.5074, 0.1272],
       zoom: 5,
       minZoom: 2,
-      maxZoom: 13,
+      maxZoom: 16,
       zoomControl: false 
     });
 
@@ -122,15 +130,23 @@ button:hover {
     window.map = map;
 
     gapIcon = L.icon({
-      iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/Untitled.png?raw=true',
-      iconSize: [30, 30],
-      iconAnchor: [15, 15],
-      popupAnchor: [0, -10]
+      iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/Untitled_.png?raw=true',
+      iconSize: [45, 18],
+      iconAnchor: [32, 8],
+      popupAnchor: [20, 8]
     });
 
     {% for loc in data %}
        
       var marker = L.marker([{{ loc.latitude }}, {{ loc.longitude }}], { icon: gapIcon }).addTo(map);
+
+      if (window.matchMedia('(hover: hover)').matches) {
+        marker.bindTooltip({{ loc.name | tojson }}, {
+        permanent: false,
+        direction: 'top',
+        offset: [-10, -4]
+        })
+        };
 
     {% endfor %}
   </script>
