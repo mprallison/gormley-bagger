@@ -66,6 +66,20 @@
       text-align: right;
     }
 
+  #toggleSidebar {
+    position: absolute;
+    top: 5px;        /* Distance from top of screen */
+    left: 115px;      /* Sidebar width (85px) + padding/spacing */
+    z-index: 2000;    /* Must be higher than #map (0) and #sidebar-layer (1000) */
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  }
+
+  #sidebar-layer.collapsed {
+    display: none;
+  }
+
   .leaflet-popup-content-wrapper {
     background: rgba(255, 255, 255, 0.85) !important;
     box-shadow: 0 3px 14px rgba(0, 0, 0.0);
@@ -723,6 +737,8 @@
       </tbody>
     </table>
   </div>
+
+  <button id="toggleSidebar">Hide table</button>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
@@ -3231,6 +3247,30 @@
         row.style.display = nameText.includes(filter) ? '' : 'none';
       });
     });
+
+    // Toggle sidebar on button click
+    const sidebar = document.getElementById("sidebar-layer");
+    const toggleBtn = document.getElementById("toggleSidebar");
+
+
+    toggleBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("collapsed");
+
+        if (sidebar.classList.contains("collapsed")) {
+            toggleBtn.style.left = "10px";
+            setTimeout(() => {
+                toggleBtn.textContent = "Show table";
+                }, 100);
+        } else {
+            toggleBtn.style.left = "115px";
+            setTimeout(() => {
+                toggleBtn.textContent = "Hide table"
+                }, 100);}
+    });
+
+
+
+
   </script>
 </body>
 
