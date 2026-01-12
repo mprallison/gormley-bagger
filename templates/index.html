@@ -69,7 +69,7 @@
   #toggleSidebar {
     position: absolute;
     top: 5px;        /* Distance from top of screen */
-    left: 115px;      /* Sidebar width (85px) + padding/spacing */
+    left: 10px;      /* Sidebar width (85px) + padding/spacing */
     z-index: 2000;    /* Must be higher than #map (0) and #sidebar-layer (1000) */
     padding: 5px 10px;
     background: rgba(255, 255, 255, 0.85);
@@ -93,18 +93,18 @@
 <body>
   <div id="map"></div>
 
-  <div id="sidebar-layer">
+  <div id="sidebar-layer" class="collapsed">
     <table id="sidebar-table">
-      <thead style="position: fixed; top: 0; background: white; z-index: 1000;">
+      <thead style="position: fixed; background: white; z-index: 1000;">
         <th style="text-align: left; width: 60px">
           <input type="text" id="searchInput" placeholder="🔎" style="width: 60px; text-align: left;">
         </th>
       </thead>
-      <tbody style="display: block; margin-top: 15px;">
+      <tbody style="display: block; margin-top: 28px;">
         {% for loc in data %}
         <tr>
           <td>
-            <button style="padding-top: 3px; padding-bottom: 3px;{% if loc.status == '1' %}background-color: #93C572;{% endif %}" onclick="goToLocation({{ loc.latitude }}, {{ loc.longitude }})">
+            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; {% if loc.status == '1' %}background-color: #93C572;{% endif %}" onclick="goToLocation({{ loc.latitude }}, {{ loc.longitude }})">
               {{ loc.name }}
             </button>
           </td>
@@ -114,7 +114,7 @@
     </table>
   </div>
 
-  <button id="toggleSidebar">Hide table</button>
+  <button id="toggleSidebar">Show table</button>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
@@ -222,7 +222,7 @@
         } else {
             toggleBtn.style.left = "115px";
             setTimeout(() => {
-                toggleBtn.textContent = "Hide table"
+                toggleBtn.textContent = "Hide"
                 }, 100);}
     });
 
