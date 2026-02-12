@@ -95,12 +95,13 @@
 
   <div id="sidebar-layer" class="collapsed">
     <table id="sidebar-table">
-      <thead style="position: fixed; background: white; z-index: 1000;">
-        <th style="text-align: left; width: 60px">
-          <input type="text" id="searchInput" placeholder="🔎" style="width: 60px; text-align: left;">
+      <thead style="position: fixed; top: 0; background: white; z-index: 1000;">
+        <th style="text-align: left; width: 50px; font-size: 14px;">
+          Title
+          <input type="text" id="searchInput" placeholder="🔍" style="width: 50px; text-align: left;">
         </th>
       </thead>
-      <tbody style="display: block; margin-top: 28px;">
+      <tbody style="display: block; margin-top: 35px;">
         {% for loc in data %}
         <tr>
           <td>
@@ -139,7 +140,7 @@
     });
 
     const bagIcon = L.icon({
-      iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/bag.png?raw=true',
+      iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/{{ user }}.png?raw=true',
       iconSize: [18, 18],
       iconAnchor: [20, 9],
       popupAnchor: [-11, -7]
