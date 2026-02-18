@@ -28,21 +28,23 @@
       z-index: 0;
     }
 
-    /* SIDEBAR STYLES */
     #sidebar-layer {
+      display: block;
       position: absolute;
       top: 0;
+      bottom: 10px;
       left: 0;
       width: 100px;
       height: 100%;
-      background: rgba(255, 255, 255, 0.9);
+      background: white;
       border-right: 1px solid #ddd;
       z-index: 1000;
       overflow-y: auto;
-      padding: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
       box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
   
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       transform: translateX(0);
     }
 
@@ -52,18 +54,17 @@
 
     #toggleSidebar {
       position: absolute;
-      top: 10px;
+      top: 5px;
       left: 125px;
       z-index: 2000;
-      padding: 6px 9px;
-      background: white;
+      padding: 4px 13px;
+      background: rgba(255, 255, 255, 0.8);
       border: 1px solid #ccc;
       border-radius: 4px;
       cursor: pointer;
       font-size: 10px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      
-      transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     #toggleSidebar.btn-collapsed {
@@ -98,7 +99,6 @@
       font-size: 12px;
     }
 
-    /* LEAFLET OVERRIDES */
     .leaflet-popup-content-wrapper {
       background: rgba(255, 255, 255, 0.9) !important;
     }
@@ -110,15 +110,16 @@
 
   <div id="sidebar-layer">
     <table id="sidebar-table">
-      <thead>
+      <thead style="position: sticky; top: 0; background: white; z-index: 1000;">
         <tr>
           <th style="text-align: left;">
-            <span style="font-size: 14px;">Title</span><br>
+            <span style="font-size: 12px;">Title</span><br>
             <input type="text" id="searchInput" placeholder="🔍 Search...">
+            <hr>
           </th>
         </tr>
       </thead>
-      <tbody style="display: block; margin-top: 10px; margin-bottom: 10px;">
+      <tbody style="position: block;">
         {% for loc in data %}
         <tr>
           <td>
@@ -182,12 +183,21 @@
 
       marker.bindPopup(`
         <div style="text-align: center;">
-          <h3 style="margin: 0;">{{ loc.name }}</h3>
-          <p style="font-size: 12px;"><a href="{{ loc.url }}" target="_blank">View Sculpture</a></p>
+          <h3 style="margin-bottom: 0;">{{ loc.name }}</h3>
+          <p style="font-size: 12px; margin-top:0"><a href="{{ loc.url }}" target="_blank">Sculpture link</a></p>
           <hr>
-          <div style="font-size: 13px; text-align: left;">
-            <strong>Year:</strong> {{ loc.year }}<br>
-            <strong>Location:</strong> {{ loc.location }}
+          <div style="display: grid;
+                    text-align: left;
+
+                grid-template-columns: max-content 1fr;
+                row-gap: 4px;
+                column-gap: 10px;
+                font-size: 13px;
+                ">
+            <strong>Year:</strong>
+            <span>{{ loc.year }}</span>
+            <strong>Location:</strong>
+            <span>{{ loc.location }}</span>
           </div>
         </div>
       `);
