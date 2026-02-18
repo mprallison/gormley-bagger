@@ -95,12 +95,13 @@
 
   <div id="sidebar-layer" class="collapsed">
     <table id="sidebar-table">
-      <thead style="position: fixed; background: white; z-index: 1000;">
-        <th style="text-align: left; width: 60px">
-          <input type="text" id="searchInput" placeholder="🔎" style="width: 60px; text-align: left;">
+      <thead style="position: fixed; top: 0; background: white; z-index: 1000;">
+        <th style="text-align: left; width: 50px; font-size: 14px;">
+          Title
+          <input type="text" id="searchInput" placeholder="🔍" style="width: 50px; text-align: left;">
         </th>
       </thead>
-      <tbody style="display: block; margin-top: 28px;">
+      <tbody style="display: block; margin-top: 35px;">
         
         <tr>
           <td>
@@ -152,7 +153,7 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.756083, -1.25525)">
+            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; background-color: #93C572;" onclick="goToLocation(51.756083, -1.25525)">
               A Door for the Stuart Gates
             </button>
           </td>
@@ -208,7 +209,7 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; background-color: #93C572;" onclick="goToLocation(51.39238922979265, 1.3816145129625068)">
+            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; background-color: #93C572;" onclick="goToLocation(51.39238923, 1.381614513)">
               Another Time
             </button>
           </td>
@@ -224,7 +225,7 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.75425558, -1.256482826)">
+            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; background-color: #93C572;" onclick="goToLocation(51.75425558, -1.256482826)">
               Another Time XI
             </button>
           </td>
@@ -352,7 +353,7 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(37.41912289857986, 127.8232613208938)">
+            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(37.4191229, 127.8232613)">
               Ground
             </button>
           </td>
@@ -424,7 +425,7 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(50.363074934784166, -4.147002013961376)">
+            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(50.36307493, -4.147002014)">
               Look II
             </button>
           </td>
@@ -763,7 +764,7 @@
     });
 
     const bagIcon = L.icon({
-      iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/bag.png?raw=true',
+      iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/matthew.png?raw=true',
       iconSize: [18, 18],
       iconAnchor: [20, 9],
       popupAnchor: [-11, -7]
@@ -957,7 +958,7 @@
     })();
     
     (function() {
-      var iconType = "" === '1' ? bagIcon : gapIcon;
+      var iconType = "1" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.756083, -1.25525], { icon: iconType }).addTo(map);
 
       // Tooltip logic
@@ -1175,7 +1176,7 @@
     
     (function() {
       var iconType = "1" === '1' ? bagIcon : gapIcon;
-      var marker = L.marker([51.39238922979265, 1.3816145129625068], { icon: iconType }).addTo(map);
+      var marker = L.marker([51.39238923, 1.381614513], { icon: iconType }).addTo(map);
 
       // Tooltip logic
       if (window.matchMedia('(hover: hover)').matches) {
@@ -1236,7 +1237,7 @@
     })();
     
     (function() {
-      var iconType = "" === '1' ? bagIcon : gapIcon;
+      var iconType = "1" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.75425558, -1.256482826], { icon: iconType }).addTo(map);
 
       // Tooltip logic
@@ -1733,7 +1734,7 @@
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
-      var marker = L.marker([37.41912289857986, 127.8232613208938], { icon: iconType }).addTo(map);
+      var marker = L.marker([37.4191229, 127.8232613], { icon: iconType }).addTo(map);
 
       // Tooltip logic
       if (window.matchMedia('(hover: hover)').matches) {
@@ -2012,7 +2013,7 @@
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
-      var marker = L.marker([50.363074934784166, -4.147002013961376], { icon: iconType }).addTo(map);
+      var marker = L.marker([50.36307493, -4.147002014], { icon: iconType }).addTo(map);
 
       // Tooltip logic
       if (window.matchMedia('(hover: hover)').matches) {

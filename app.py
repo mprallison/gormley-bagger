@@ -3,10 +3,10 @@ import csv
 
 env = Environment(loader=FileSystemLoader("templates"))
 
-data_file = "gormleys - Sheet1.csv"
-user = "emily"
-title = "emilyGormleyBagger"
-filename = "gormley_map_emily.html"
+data_file = "data.csv"
+user = "matthew"
+title = "gormleyBagger"
+filename = "gormley_map.html"
 
 #read gormley data and user field
 #rename user field "status"
