@@ -4,9 +4,9 @@ import csv
 env = Environment(loader=FileSystemLoader("templates"))
 
 data_file = "data.csv"
-user = "matthew"
-title = "gormleyBagger"
-filename = "gormley_map.html"
+user = "emily"
+title = "emilyGormleyBagger"
+filename = "gormley_map_emily.html"
 
 #read gormley data and user field
 #rename user field "status"
