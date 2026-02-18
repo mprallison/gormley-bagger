@@ -16,6 +16,7 @@
       height: 100%;
       margin: 0;
       overflow: hidden;
+      font-family: sans-serif;
     }
 
     #map {
@@ -27,85 +28,102 @@
       z-index: 0;
     }
 
+    /* SIDEBAR STYLES */
     #sidebar-layer {
-      display: block;
       position: absolute;
       top: 0;
       left: 0;
-      width: 85px;
-      height: 97.5%;
+      width: 100px;
+      height: 100%;
       background: rgba(255, 255, 255, 0.9);
-      border: 1px solid #ddd;
+      border-right: 1px solid #ddd;
       z-index: 1000;
       overflow-y: auto;
       padding: 10px;
       box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(0);
+    }
+
+    #sidebar-layer.collapsed {
+      transform: translateX(-100%);
+    }
+
+    #toggleSidebar {
+      position: absolute;
+      top: 10px;
+      left: 125px;
+      z-index: 2000;
+      padding: 6px 9px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      
+      transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #toggleSidebar.btn-collapsed {
+      left: 10px;
+    }
+
+    #sidebar-table {
+      width: 100%;
+      border-collapse: collapse;
     }
 
     #sidebar-table td button {
       cursor: pointer;
       text-align: left;
-      vertical-align: top;
+      width: 100%;
+      padding: 4px;
+      margin-bottom: 2px;
+      border-radius: 4px;
+      border: 1px solid #333;
+      font-size: 9px;
+      background: #f9f9f9;
       white-space: normal;
-      width: 60px;
-    }
-
-    button {
-      border-radius: 6px;
-      border-width: 1px;
-      border-color: black;
-      cursor: pointer;
-      font-size:8px;
     }
 
     button:hover {
       filter: brightness(90%);
     }
 
-    #searchInput::placeholder {
-      text-align: right;
+    #searchInput {
+      width: 90%;
+      margin-top: 5px;
+      font-size: 12px;
     }
 
-  #toggleSidebar {
-    position: absolute;
-    top: 5px;        /* Distance from top of screen */
-    left: 10px;      /* Sidebar width (85px) + padding/spacing */
-    z-index: 2000;    /* Must be higher than #map (0) and #sidebar-layer (1000) */
-    padding: 5px 10px;
-    background: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-  }
-
-  #sidebar-layer.collapsed {
-    display: none;
-  }
-
-  .leaflet-popup-content-wrapper {
-    background: rgba(255, 255, 255, 0.85) !important;
-    box-shadow: 0 3px 14px rgba(0, 0, 0.0);
-  }
-.leaflet-popup-tip {
-    background: rgba(255, 255, 255, 0.85) !important;
-  }
+    /* LEAFLET OVERRIDES */
+    .leaflet-popup-content-wrapper {
+      background: rgba(255, 255, 255, 0.9) !important;
+    }
   </style>
 </head>
 
 <body>
   <div id="map"></div>
 
-  <div id="sidebar-layer" class="collapsed">
+  <div id="sidebar-layer">
     <table id="sidebar-table">
-      <thead style="position: fixed; top: 0; background: white; z-index: 1000;">
-        <th style="text-align: left; width: 50px; font-size: 14px;">
-          Title
-          <input type="text" id="searchInput" placeholder="🔍" style="width: 50px; text-align: left;">
-        </th>
+      <thead>
+        <tr>
+          <th style="text-align: left;">
+            <span style="font-size: 14px;">Title</span><br>
+            <input type="text" id="searchInput" placeholder="🔍 Search...">
+          </th>
+        </tr>
       </thead>
-      <tbody style="display: block; margin-top: 35px;">
+      <tbody style="display: block; margin-top: 10px; margin-bottom: 10px;">
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(55.95008363, -3.228595934)">
+            <button style="" 
+                    onclick="goToLocation(55.95008363, -3.228595934)">
               6 Times (Figure II)
             </button>
           </td>
@@ -113,7 +131,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; background-color: #93C572;" onclick="goToLocation(55.95118355, -3.225297946)">
+            <button style="background-color: #93C572;" 
+                    onclick="goToLocation(55.95118355, -3.225297946)">
               6 Times (Figure I)
             </button>
           </td>
@@ -121,7 +140,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(55.95819491, -3.208878658)">
+            <button style="" 
+                    onclick="goToLocation(55.95819491, -3.208878658)">
               6 Times (Figure III)
             </button>
           </td>
@@ -129,7 +149,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(55.96759562, -3.194258808)">
+            <button style="" 
+                    onclick="goToLocation(55.96759562, -3.194258808)">
               6 Times (Figure IV)
             </button>
           </td>
@@ -137,7 +158,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(55.97192991, -3.183396928)">
+            <button style="" 
+                    onclick="goToLocation(55.97192991, -3.183396928)">
               6 Times (Figure V)
             </button>
           </td>
@@ -145,7 +167,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(55.98427299, -3.176415874)">
+            <button style="" 
+                    onclick="goToLocation(55.98427299, -3.176415874)">
               6 Times (Figure VI)
             </button>
           </td>
@@ -153,7 +176,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; background-color: #93C572;" onclick="goToLocation(51.756083, -1.25525)">
+            <button style="background-color: #93C572;" 
+                    onclick="goToLocation(51.756083, -1.25525)">
               A Door for the Stuart Gates
             </button>
           </td>
@@ -161,7 +185,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(55.673426, 14.241283)">
+            <button style="" 
+                    onclick="goToLocation(55.673426, 14.241283)">
               A Sculpture for the Subjective Experience of Architecture
             </button>
           </td>
@@ -169,7 +194,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.498922, -0.174722)">
+            <button style="" 
+                    onclick="goToLocation(51.498922, -0.174722)">
               Alert
             </button>
           </td>
@@ -177,7 +203,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(24.660726, -100.4203)">
+            <button style="" 
+                    onclick="goToLocation(24.660726, -100.4203)">
               Allotment III
             </button>
           </td>
@@ -185,7 +212,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(54.9141254, -1.5916828)">
+            <button style="" 
+                    onclick="goToLocation(54.9141254, -1.5916828)">
               Angel of the North
             </button>
           </td>
@@ -193,7 +221,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(53.4909747, -3.0605476)">
+            <button style="" 
+                    onclick="goToLocation(53.4909747, -3.0605476)">
               Another Place
             </button>
           </td>
@@ -201,7 +230,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(37.07268, 138.77664)">
+            <button style="" 
+                    onclick="goToLocation(37.07268, 138.77664)">
               Another Singularity
             </button>
           </td>
@@ -209,7 +239,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; background-color: #93C572;" onclick="goToLocation(51.39238923, 1.381614513)">
+            <button style="background-color: #93C572;" 
+                    onclick="goToLocation(51.39238923, 1.381614513)">
               Another Time
             </button>
           </td>
@@ -217,7 +248,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(56.4624148, -3.0428533)">
+            <button style="" 
+                    onclick="goToLocation(56.4624148, -3.0428533)">
               Another Time X
             </button>
           </td>
@@ -225,7 +257,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; background-color: #93C572;" onclick="goToLocation(51.75425558, -1.256482826)">
+            <button style="background-color: #93C572;" 
+                    onclick="goToLocation(51.75425558, -1.256482826)">
               Another Time XI
             </button>
           </td>
@@ -233,7 +266,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.5089923, -0.03449)">
+            <button style="" 
+                    onclick="goToLocation(51.5089923, -0.03449)">
               Another Time XVI
             </button>
           </td>
@@ -241,7 +275,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.07673068, 1.191638036)">
+            <button style="" 
+                    onclick="goToLocation(51.07673068, 1.191638036)">
               Another Time XVIII
             </button>
           </td>
@@ -249,7 +284,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(33.6277222, 131.6034167)">
+            <button style="" 
+                    onclick="goToLocation(33.6277222, 131.6034167)">
               Another Time XX
             </button>
           </td>
@@ -257,7 +293,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(48.1323, 11.5983369)">
+            <button style="" 
+                    onclick="goToLocation(48.1323, 11.5983369)">
               Bare V
             </button>
           </td>
@@ -265,7 +302,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(34.840583, 128.429818)">
+            <button style="" 
+                    onclick="goToLocation(34.840583, 128.429818)">
               Bearing III
             </button>
           </td>
@@ -273,7 +311,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(58.9704986, 5.7303649)">
+            <button style="" 
+                    onclick="goToLocation(58.9704986, 5.7303649)">
               Broken Column
             </button>
           </td>
@@ -281,7 +320,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(42.3631626, -71.0926482)">
+            <button style="" 
+                    onclick="goToLocation(42.3631626, -71.0926482)">
               Chord
             </button>
           </td>
@@ -289,7 +329,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(48.8599697, 2.3572959)">
+            <button style="" 
+                    onclick="goToLocation(48.8599697, 2.3572959)">
               Cloud Chain
             </button>
           </td>
@@ -297,7 +338,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.5047889, -0.2003235)">
+            <button style="" 
+                    onclick="goToLocation(51.5047889, -0.2003235)">
               Connect
             </button>
           </td>
@@ -305,7 +347,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(1.2846547, 103.8609937)">
+            <button style="" 
+                    onclick="goToLocation(1.2846547, 103.8609937)">
               Drift
             </button>
           </td>
@@ -313,7 +356,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(52.521953, 5.4253192)">
+            <button style="" 
+                    onclick="goToLocation(52.521953, 5.4253192)">
               Exposure
             </button>
           </td>
@@ -321,7 +365,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(43.4685584, 11.1376636)">
+            <button style="" 
+                    onclick="goToLocation(43.4685584, 11.1376636)">
               Fai Spazio, Prendi Posto (Making Space, Taking Place)
             </button>
           </td>
@@ -329,7 +374,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; background-color: #93C572;" onclick="goToLocation(51.526033, -0.134058)">
+            <button style="background-color: #93C572;" 
+                    onclick="goToLocation(51.526033, -0.134058)">
               Feel
             </button>
           </td>
@@ -337,7 +383,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(55.900743, -3.421232)">
+            <button style="" 
+                    onclick="goToLocation(55.900743, -3.421232)">
               Firmament
             </button>
           </td>
@@ -345,7 +392,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(55.5268525, -5.5014542)">
+            <button style="" 
+                    onclick="goToLocation(55.5268525, -5.5014542)">
               Grip
             </button>
           </td>
@@ -353,7 +401,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(37.4191229, 127.8232613)">
+            <button style="" 
+                    onclick="goToLocation(37.4191229, 127.8232613)">
               Ground
             </button>
           </td>
@@ -361,7 +410,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(61.2163051, -149.8884068)">
+            <button style="" 
+                    onclick="goToLocation(61.2163051, -149.8884068)">
               Habitat
             </button>
           </td>
@@ -369,7 +419,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(66.3101601, 14.1274651)">
+            <button style="" 
+                    onclick="goToLocation(66.3101601, 14.1274651)">
               Havmann
             </button>
           </td>
@@ -377,7 +428,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(56.199503, 12.557791)">
+            <button style="" 
+                    onclick="goToLocation(56.199503, 12.557791)">
               Here and Here
             </button>
           </td>
@@ -385,7 +437,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(34.1751492, 135.4602919)">
+            <button style="" 
+                    onclick="goToLocation(34.1751492, 135.4602919)">
               Here and There
             </button>
           </td>
@@ -393,7 +446,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(-29.4611752, 120.749213)">
+            <button style="" 
+                    onclick="goToLocation(-29.4611752, 120.749213)">
               Inside Australia
             </button>
           </td>
@@ -401,7 +455,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(52.4789949, -1.904861)">
+            <button style="" 
+                    onclick="goToLocation(52.4789949, -1.904861)">
               Iron:Man
             </button>
           </td>
@@ -409,7 +464,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.052639, 13.736667)">
+            <button style="" 
+                    onclick="goToLocation(51.052639, 13.736667)">
               Learning to See III and Under My Skin
             </button>
           </td>
@@ -417,7 +473,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(52.208466, 0.124341)">
+            <button style="" 
+                    onclick="goToLocation(52.208466, 0.124341)">
               Learning to See VI
             </button>
           </td>
@@ -425,7 +482,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(50.36307493, -4.147002014)">
+            <button style="" 
+                    onclick="goToLocation(50.36307493, -4.147002014)">
               Look II
             </button>
           </td>
@@ -433,7 +491,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.6058236, -0.4831649)">
+            <button style="" 
+                    onclick="goToLocation(51.6058236, -0.4831649)">
               Making Space
             </button>
           </td>
@@ -441,7 +500,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(37.3695, 138.8965)">
+            <button style="" 
+                    onclick="goToLocation(37.3695, 138.8965)">
               Man:Rock V
             </button>
           </td>
@@ -449,7 +509,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(48.1394124, 11.5689943)">
+            <button style="" 
+                    onclick="goToLocation(48.1394124, 11.5689943)">
               Mark II
             </button>
           </td>
@@ -457,7 +518,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(34.699087, 135.491727)">
+            <button style="" 
+                    onclick="goToLocation(34.699087, 135.491727)">
               Mind-Body Column
             </button>
           </td>
@@ -465,7 +527,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(48.1033938, -1.6878374)">
+            <button style="" 
+                    onclick="goToLocation(48.1033938, -1.6878374)">
               Open Space
             </button>
           </td>
@@ -473,7 +536,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.3168624, 9.5000296)">
+            <button style="" 
+                    onclick="goToLocation(51.3168624, 9.5000296)">
               Out of the Dark
             </button>
           </td>
@@ -481,7 +545,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(49.6313504, 3.1787161)">
+            <button style="" 
+                    onclick="goToLocation(49.6313504, 3.1787161)">
               Passage
             </button>
           </td>
@@ -489,7 +554,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(59.9043812, 10.7375367)">
+            <button style="" 
+                    onclick="goToLocation(59.9043812, 10.7375367)">
               Place of Remembrance
             </button>
           </td>
@@ -497,7 +563,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(52.57274679, -0.2448478056)">
+            <button style="" 
+                    onclick="goToLocation(52.57274679, -0.2448478056)">
               Places to Be (Figure I)
             </button>
           </td>
@@ -505,7 +572,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(52.57241425, -0.2424552752)">
+            <button style="" 
+                    onclick="goToLocation(52.57241425, -0.2424552752)">
               Places to Be (Figure II)
             </button>
           </td>
@@ -513,7 +581,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(52.57330103, -0.2436890913)">
+            <button style="" 
+                    onclick="goToLocation(52.57330103, -0.2436890913)">
               Places to Be (Figure III)
             </button>
           </td>
@@ -521,7 +590,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.5299996, -0.1280864)">
+            <button style="" 
+                    onclick="goToLocation(51.5299996, -0.1280864)">
               Planets
             </button>
           </td>
@@ -529,7 +599,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(52.2027, 0.1219)">
+            <button style="" 
+                    onclick="goToLocation(52.2027, 0.1219)">
               Plant
             </button>
           </td>
@@ -537,7 +608,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.5018139, 0.0091839)">
+            <button style="" 
+                    onclick="goToLocation(51.5018139, 0.0091839)">
               Quantum Cloud
             </button>
           </td>
@@ -545,7 +617,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; background-color: #93C572;" onclick="goToLocation(51.5244224, -0.1440789)">
+            <button style="background-color: #93C572;" 
+                    onclick="goToLocation(51.5244224, -0.1440789)">
               Reflection
             </button>
           </td>
@@ -553,7 +626,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.51584628, -0.106283141)">
+            <button style="" 
+                    onclick="goToLocation(51.51584628, -0.106283141)">
               Resolution
             </button>
           </td>
@@ -561,7 +635,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(38.7672471, -9.094888)">
+            <button style="" 
+                    onclick="goToLocation(38.7672471, -9.094888)">
               Rhizome II
             </button>
           </td>
@@ -569,7 +644,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.5128465, -0.1523666)">
+            <button style="" 
+                    onclick="goToLocation(51.5128465, -0.1523666)">
               Room
             </button>
           </td>
@@ -577,7 +653,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(37.4005, 25.2682)">
+            <button style="" 
+                    onclick="goToLocation(37.4005, 25.2682)">
               Rule II
             </button>
           </td>
@@ -585,7 +662,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(54.9955757, -7.3191791)">
+            <button style="" 
+                    onclick="goToLocation(54.9955757, -7.3191791)">
               Sculpture for Derry Walls
             </button>
           </td>
@@ -593,7 +671,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(38.91728, 16.58325)">
+            <button style="" 
+                    onclick="goToLocation(38.91728, 16.58325)">
               Seven Times
             </button>
           </td>
@@ -601,7 +680,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(22.287191, 114.210539)">
+            <button style="" 
+                    onclick="goToLocation(22.287191, 114.210539)">
               Shelf II
             </button>
           </td>
@@ -609,7 +689,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(45.037533, 6.284781)">
+            <button style="" 
+                    onclick="goToLocation(45.037533, 6.284781)">
               Site
             </button>
           </td>
@@ -617,7 +698,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.0606892, -1.3131538)">
+            <button style="" 
+                    onclick="goToLocation(51.0606892, -1.3131538)">
               Sound II
             </button>
           </td>
@@ -625,7 +707,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(61.1122823, 10.4387637)">
+            <button style="" 
+                    onclick="goToLocation(61.1122823, 10.4387637)">
               Standing Matter XVII
             </button>
           </td>
@@ -633,7 +716,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(-43.5282527, 172.6287084)">
+            <button style="" 
+                    onclick="goToLocation(-43.5282527, 172.6287084)">
               Stay
             </button>
           </td>
@@ -641,7 +725,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(-43.5307273, 172.6287776)">
+            <button style="" 
+                    onclick="goToLocation(-43.5307273, 172.6287776)">
               Stay
             </button>
           </td>
@@ -649,7 +734,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(52.5183242, 13.3788813)">
+            <button style="" 
+                    onclick="goToLocation(52.5183242, 13.3788813)">
               Steht Und Fällt
             </button>
           </td>
@@ -657,7 +743,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(50.5507395, -2.4465833)">
+            <button style="" 
+                    onclick="goToLocation(50.5507395, -2.4465833)">
               Still Falling
             </button>
           </td>
@@ -665,7 +752,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.2797971, 1.0827998)">
+            <button style="" 
+                    onclick="goToLocation(51.2797971, 1.0827998)">
               Transport
             </button>
           </td>
@@ -673,7 +761,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(52.203849, 0.115856)">
+            <button style="" 
+                    onclick="goToLocation(52.203849, 0.115856)">
               True, for Alan Turing
             </button>
           </td>
@@ -681,7 +770,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.2801057, 0.5179559)">
+            <button style="" 
+                    onclick="goToLocation(51.2801057, 0.5179559)">
               Two Stones
             </button>
           </td>
@@ -689,7 +779,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.5485714, -0.1985727)">
+            <button style="" 
+                    onclick="goToLocation(51.5485714, -0.1985727)">
               Untitled [Listening]
             </button>
           </td>
@@ -697,7 +788,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(51.5299996, -0.1275392)">
+            <button style="" 
+                    onclick="goToLocation(51.5299996, -0.1275392)">
               Witness
             </button>
           </td>
@@ -705,7 +797,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(48.8609973, 2.3296885)">
+            <button style="" 
+                    onclick="goToLocation(48.8609973, 2.3296885)">
               Witness VII
             </button>
           </td>
@@ -713,7 +806,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(48.8610044, 2.3311208)">
+            <button style="" 
+                    onclick="goToLocation(48.8610044, 2.3311208)">
               Witness VIII
             </button>
           </td>
@@ -721,7 +815,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; " onclick="goToLocation(53.693127, -1.6599717)">
+            <button style="" 
+                    onclick="goToLocation(53.693127, -1.6599717)">
               Work
             </button>
           </td>
@@ -729,7 +824,8 @@
         
         <tr>
           <td>
-            <button style="padding: 3px; margin-top: 1px; margin-bottom: 0; background-color: #93C572;" onclick="goToLocation(51.543447, -0.1521035)">
+            <button style="background-color: #93C572;" 
+                    onclick="goToLocation(51.543447, -0.1521035)">
               You
             </button>
           </td>
@@ -739,35 +835,46 @@
     </table>
   </div>
 
-  <button id="toggleSidebar">Show table</button>
+  <button id="toggleSidebar">Hide</button>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
   <script>
+    // initialize map
     var map = L.map('map', {
       center: [51.5074, 0.1272],
       zoom: 5,
-      minZoom: 2,
-      maxZoom: 16,
       zoomControl: false
     });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      attribution: '&copy; OpenStreetMap'
     }).addTo(map);
+
+    const sidebar = document.getElementById("sidebar-layer");
+    const toggleBtn = document.getElementById("toggleSidebar");
+
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("collapsed");
+      toggleBtn.classList.toggle("btn-collapsed");
+
+      if (sidebar.classList.contains("collapsed")) {
+        toggleBtn.textContent = "Show Table";
+      } else {
+        toggleBtn.textContent = "Hide";
+      }
+    });
 
     const gapIcon = L.icon({
       iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/gap.png?raw=true',
       iconSize: [18, 18],
-      iconAnchor: [20, 9],
-      popupAnchor: [-11, -7]
+      iconAnchor: [9, 9]
     });
 
     const bagIcon = L.icon({
       iconUrl: 'https://github.com/mprallison/gormley-bagger/blob/main/static/images/matthew.png?raw=true',
       iconSize: [18, 18],
-      iconAnchor: [20, 9],
-      popupAnchor: [-11, -7]
+      iconAnchor: [9, 9]
     });
 
     
@@ -775,2462 +882,1355 @@
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([55.95008363, -3.228595934], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("6 Times (Figure II)", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">6 Times (Figure II)</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2010</span>
-            <strong>Location:</strong> <span>Water of Leith, Edinburgh, Scotland</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">6 Times (Figure II)</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2010<br>
+            <strong>Location:</strong> Water of Leith, Edinburgh, Scotland
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "1" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([55.95118355, -3.225297946], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("6 Times (Figure I)", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">6 Times (Figure I)</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2010</span>
-            <strong>Location:</strong> <span>Water of Leith, Edinburgh, Scotland</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">6 Times (Figure I)</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2010<br>
+            <strong>Location:</strong> Water of Leith, Edinburgh, Scotland
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([55.95819491, -3.208878658], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("6 Times (Figure III)", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">6 Times (Figure III)</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2010</span>
-            <strong>Location:</strong> <span>Water of Leith, Edinburgh, Scotland</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">6 Times (Figure III)</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2010<br>
+            <strong>Location:</strong> Water of Leith, Edinburgh, Scotland
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([55.96759562, -3.194258808], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("6 Times (Figure IV)", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">6 Times (Figure IV)</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2010</span>
-            <strong>Location:</strong> <span>Water of Leith, Edinburgh, Scotland</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">6 Times (Figure IV)</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2010<br>
+            <strong>Location:</strong> Water of Leith, Edinburgh, Scotland
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([55.97192991, -3.183396928], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("6 Times (Figure V)", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">6 Times (Figure V)</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2010</span>
-            <strong>Location:</strong> <span>Water of Leith, Edinburgh, Scotland</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">6 Times (Figure V)</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2010<br>
+            <strong>Location:</strong> Water of Leith, Edinburgh, Scotland
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([55.98427299, -3.176415874], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("6 Times (Figure VI)", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">6 Times (Figure VI)</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2010</span>
-            <strong>Location:</strong> <span>Water of Leith, Edinburgh, Scotland</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">6 Times (Figure VI)</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2010<br>
+            <strong>Location:</strong> Water of Leith, Edinburgh, Scotland
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "1" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.756083, -1.25525], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("A Door for the Stuart Gates", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">A Door for the Stuart Gates</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/a-door-for-the-stuart-gates" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2021</span>
-            <strong>Location:</strong> <span>Trinity College, University of Oxford, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">A Door for the Stuart Gates</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/a-door-for-the-stuart-gates" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2021<br>
+            <strong>Location:</strong> Trinity College, University of Oxford, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([55.673426, 14.241283], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("A Sculpture for the Subjective Experience of Architecture", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">A Sculpture for the Subjective Experience of Architecture</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/a-sculpture-for-subjective-experience-of-architecture" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2008</span>
-            <strong>Location:</strong> <span>Kivik, Sweden</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">A Sculpture for the Subjective Experience of Architecture</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/a-sculpture-for-subjective-experience-of-architecture" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2008<br>
+            <strong>Location:</strong> Kivik, Sweden
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.498922, -0.174722], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Alert", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Alert</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/alert-2022" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2022</span>
-            <strong>Location:</strong> <span>Imperial College London, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Alert</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/alert-2022" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2022<br>
+            <strong>Location:</strong> Imperial College London, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([24.660726, -100.4203], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Allotment III", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Allotment III</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/allotment-iii" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2008</span>
-            <strong>Location:</strong> <span>University of Monterrey, Mexico</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Allotment III</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/allotment-iii" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2008<br>
+            <strong>Location:</strong> University of Monterrey, Mexico
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([54.9141254, -1.5916828], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Angel of the North", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Angel of the North</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/angel-of-the-north" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1998</span>
-            <strong>Location:</strong> <span>Gateshead, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Angel of the North</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/angel-of-the-north" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1998<br>
+            <strong>Location:</strong> Gateshead, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([53.4909747, -3.0605476], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Another Place", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Another Place</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/another-place" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1997</span>
-            <strong>Location:</strong> <span>Crosby Beach, Merseyside, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Another Place</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/another-place" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1997<br>
+            <strong>Location:</strong> Crosby Beach, Merseyside, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([37.07268, 138.77664], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Another Singularity", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Another Singularity</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/another-singularity-japan" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2009</span>
-            <strong>Location:</strong> <span>Tokamachi City, Niigata Prefecture, Japan</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Another Singularity</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/another-singularity-japan" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2009<br>
+            <strong>Location:</strong> Tokamachi City, Niigata Prefecture, Japan
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "1" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.39238923, 1.381614513], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Another Time", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Another Time</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://turnercontemporary.org/whats-on/exhibitions/another-time" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2017</span>
-            <strong>Location:</strong> <span>Margate, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Another Time</h3>
+          <p style="font-size: 12px;"><a href="https://turnercontemporary.org/whats-on/exhibitions/another-time" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2017<br>
+            <strong>Location:</strong> Margate, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([56.4624148, -3.0428533], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Another Time X", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Another Time X</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/another-time-x" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2008</span>
-            <strong>Location:</strong> <span>Maggie’s Centre, Dundee, Scotland</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Another Time X</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/another-time-x" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2008<br>
+            <strong>Location:</strong> Maggie’s Centre, Dundee, Scotland
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "1" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.75425558, -1.256482826], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Another Time XI", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Another Time XI</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/another-time-xi" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2008</span>
-            <strong>Location:</strong> <span>Exeter College, Oxford, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Another Time XI</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/another-time-xi" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2008<br>
+            <strong>Location:</strong> Exeter College, Oxford, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.5089923, -0.03449], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Another Time XVI", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Another Time XVI</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/another-time-xvi" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2012</span>
-            <strong>Location:</strong> <span>Limehouse Reach, London, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Another Time XVI</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/another-time-xvi" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2012<br>
+            <strong>Location:</strong> Limehouse Reach, London, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.07673068, 1.191638036], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Another Time XVIII", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Another Time XVIII</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.creativefolkestone.org.uk/artists/antony-gormley-artworks/" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2013</span>
-            <strong>Location:</strong> <span>Folkestone, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Another Time XVIII</h3>
+          <p style="font-size: 12px;"><a href="https://www.creativefolkestone.org.uk/artists/antony-gormley-artworks/" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2013<br>
+            <strong>Location:</strong> Folkestone, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([33.6277222, 131.6034167], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Another Time XX", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Another Time XX</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/another-time-xx" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2013</span>
-            <strong>Location:</strong> <span>Kunisaki Peninsula, Japan</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Another Time XX</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/another-time-xx" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2013<br>
+            <strong>Location:</strong> Kunisaki Peninsula, Japan
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([48.1323, 11.5983369], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Bare V", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Bare V</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/bare-v" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2014</span>
-            <strong>Location:</strong> <span>Erzdiozese Munchen, Munich, Germany</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Bare V</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/bare-v" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2014<br>
+            <strong>Location:</strong> Erzdiozese Munchen, Munich, Germany
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([34.840583, 128.429818], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Bearing III", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Bearing III</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/bearing-iii" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1997</span>
-            <strong>Location:</strong> <span>Tongyeong City, South Korea</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Bearing III</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/bearing-iii" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1997<br>
+            <strong>Location:</strong> Tongyeong City, South Korea
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([58.9704986, 5.7303649], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Broken Column", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Broken Column</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/broken-column" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2003</span>
-            <strong>Location:</strong> <span>Tifluktsrom, Stavanger, Norway</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Broken Column</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/broken-column" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2003<br>
+            <strong>Location:</strong> Tifluktsrom, Stavanger, Norway
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([42.3631626, -71.0926482], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Chord", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Chord</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/chord" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2015</span>
-            <strong>Location:</strong> <span>MIT, Cambridge, Massachusetts, USA</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Chord</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/chord" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2015<br>
+            <strong>Location:</strong> MIT, Cambridge, Massachusetts, USA
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([48.8599697, 2.3572959], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Cloud Chain", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Cloud Chain</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/cloud-chain" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2012</span>
-            <strong>Location:</strong> <span>French National Archives, Paris, France</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Cloud Chain</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/cloud-chain" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2012<br>
+            <strong>Location:</strong> French National Archives, Paris, France
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.5047889, -0.2003235], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Connect", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Connect</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/connect" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2015</span>
-            <strong>Location:</strong> <span>Holland Park School, London, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Connect</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/connect" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2015<br>
+            <strong>Location:</strong> Holland Park School, London, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([1.2846547, 103.8609937], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Drift", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Drift</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/drift" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2009</span>
-            <strong>Location:</strong> <span>Marina Bay Sands, Singapore</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Drift</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/drift" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2009<br>
+            <strong>Location:</strong> Marina Bay Sands, Singapore
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([52.521953, 5.4253192], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Exposure", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Exposure</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/exposure" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2010</span>
-            <strong>Location:</strong> <span>Lelystad, the Netherlands</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Exposure</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/exposure" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2010<br>
+            <strong>Location:</strong> Lelystad, the Netherlands
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([43.4685584, 11.1376636], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Fai Spazio, Prendi Posto (Making Space, Taking Place)", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Fai Spazio, Prendi Posto (Making Space, Taking Place)</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/fai-spazio-prendi-posto-making-space-taking-place" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2004</span>
-            <strong>Location:</strong> <span>Poggibonsi, Italy</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Fai Spazio, Prendi Posto (Making Space, Taking Place)</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/fai-spazio-prendi-posto-making-space-taking-place" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2004<br>
+            <strong>Location:</strong> Poggibonsi, Italy
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "1" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.526033, -0.134058], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Feel", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Feel</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/feel" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2001</span>
-            <strong>Location:</strong> <span>Wellcome Collection, London, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Feel</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/feel" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2001<br>
+            <strong>Location:</strong> Wellcome Collection, London, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([55.900743, -3.421232], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Firmament", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Firmament</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/firmament" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2008</span>
-            <strong>Location:</strong> <span>Jupiter Artland, Edinburgh, Scotland</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Firmament</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/firmament" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2008<br>
+            <strong>Location:</strong> Jupiter Artland, Edinburgh, Scotland
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([55.5268525, -5.5014542], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Grip", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Grip</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/grip" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2014</span>
-            <strong>Location:</strong> <span>Saddell Bay, Mull of Kintyre, Scotland</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Grip</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/grip" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2014<br>
+            <strong>Location:</strong> Saddell Bay, Mull of Kintyre, Scotland
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([37.4191229, 127.8232613], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Ground", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Ground</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/ground" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2025</span>
-            <strong>Location:</strong> <span>Museum SAN, Wonju, South Korea</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Ground</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/ground" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2025<br>
+            <strong>Location:</strong> Museum SAN, Wonju, South Korea
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([61.2163051, -149.8884068], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Habitat", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Habitat</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/habitat" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2010</span>
-            <strong>Location:</strong> <span>Anchorage, Alaska, USA</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Habitat</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/habitat" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2010<br>
+            <strong>Location:</strong> Anchorage, Alaska, USA
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([66.3101601, 14.1274651], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Havmann", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Havmann</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/havmann" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1994</span>
-            <strong>Location:</strong> <span>Mo i Rana, Norway</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Havmann</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/havmann" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1994<br>
+            <strong>Location:</strong> Mo i Rana, Norway
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([56.199503, 12.557791], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Here and Here", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Here and Here</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/here-and-here" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2001</span>
-            <strong>Location:</strong> <span>Municipality of Höganäs, Sweden</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Here and Here</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/here-and-here" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2001<br>
+            <strong>Location:</strong> Municipality of Höganäs, Sweden
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([34.1751492, 135.4602919], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Here and There", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Here and There</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/here-and-there" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2002</span>
-            <strong>Location:</strong> <span>Izumi City Plaza, Osaka, Japan</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Here and There</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/here-and-there" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2002<br>
+            <strong>Location:</strong> Izumi City Plaza, Osaka, Japan
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([-29.4611752, 120.749213], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Inside Australia", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Inside Australia</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/inside-australia" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2003</span>
-            <strong>Location:</strong> <span>Lake Ballard, Menzies, Western Australia</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Inside Australia</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/inside-australia" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2003<br>
+            <strong>Location:</strong> Lake Ballard, Menzies, Western Australia
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([52.4789949, -1.904861], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Iron:Man", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Iron:Man</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/iron-man" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1993</span>
-            <strong>Location:</strong> <span>Victoria Square, Birmingham, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Iron:Man</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/iron-man" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1993<br>
+            <strong>Location:</strong> Victoria Square, Birmingham, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.052639, 13.736667], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Learning to See III and Under My Skin", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Learning to See III and Under My Skin</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/news/learning-to-see-iii-and-under-my-skin-now-on-permanent-display-at-staatliche-kunstsammlungen" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1993</span>
-            <strong>Location:</strong> <span>Staatliche Kunstsammlungen Dresden: SKD, Dresden, Germany</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Learning to See III and Under My Skin</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/news/learning-to-see-iii-and-under-my-skin-now-on-permanent-display-at-staatliche-kunstsammlungen" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1993<br>
+            <strong>Location:</strong> Staatliche Kunstsammlungen Dresden: SKD, Dresden, Germany
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([52.208466, 0.124341], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Learning to See VI", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Learning to See VI</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/learning-to-see" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1995</span>
-            <strong>Location:</strong> <span>Jesus College, Cambridge, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Learning to See VI</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/learning-to-see" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1995<br>
+            <strong>Location:</strong> Jesus College, Cambridge, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([50.36307493, -4.147002014], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Look II", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Look II</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/look-ii" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2017</span>
-            <strong>Location:</strong> <span>West Hoe Pier, Plymouth, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Look II</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/look-ii" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2017<br>
+            <strong>Location:</strong> West Hoe Pier, Plymouth, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.6058236, -0.4831649], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Making Space", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Making Space</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/making-space" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2004</span>
-            <strong>Location:</strong> <span>Heart Science Centre, Harefield, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Making Space</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/making-space" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2004<br>
+            <strong>Location:</strong> Heart Science Centre, Harefield, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([37.3695, 138.8965], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Man:Rock V", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Man:Rock V</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/man-rock-v" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2024</span>
-            <strong>Location:</strong> <span>Niigata Prefecture, Japan</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Man:Rock V</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/man-rock-v" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2024<br>
+            <strong>Location:</strong> Niigata Prefecture, Japan
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([48.1394124, 11.5689943], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Mark II", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Mark II</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/mark-ii" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2014</span>
-            <strong>Location:</strong> <span>Erzdiozese Munchen, Munich, Germany</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Mark II</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/mark-ii" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2014<br>
+            <strong>Location:</strong> Erzdiozese Munchen, Munich, Germany
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([34.699087, 135.491727], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Mind-Body Column", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Mind-Body Column</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/mind-body-column" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2000</span>
-            <strong>Location:</strong> <span>Garden City, Osaka, Japan</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Mind-Body Column</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/mind-body-column" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2000<br>
+            <strong>Location:</strong> Garden City, Osaka, Japan
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([48.1033938, -1.6878374], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Open Space", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Open Space</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/open-space" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1991</span>
-            <strong>Location:</strong> <span>Place Jean Monnet, Ville de Rennes, France</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Open Space</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/open-space" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1991<br>
+            <strong>Location:</strong> Place Jean Monnet, Ville de Rennes, France
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.3168624, 9.5000296], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Out of the Dark", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Out of the Dark</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/out-of-the-dark" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1987</span>
-            <strong>Location:</strong> <span>Martinsplatz, Kassel, Germany</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Out of the Dark</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/out-of-the-dark" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1987<br>
+            <strong>Location:</strong> Martinsplatz, Kassel, Germany
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([49.6313504, 3.1787161], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Passage", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Passage</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/passage" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2000</span>
-            <strong>Location:</strong> <span>Caumont, Picardie, France</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Passage</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/passage" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2000<br>
+            <strong>Location:</strong> Caumont, Picardie, France
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([59.9043812, 10.7375367], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Place of Remembrance", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Place of Remembrance</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/place-of-remembrance" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2000</span>
-            <strong>Location:</strong> <span>Oslo, Norway</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Place of Remembrance</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/place-of-remembrance" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2000<br>
+            <strong>Location:</strong> Oslo, Norway
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([52.57274679, -0.2448478056], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Places to Be (Figure I)", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Places to Be (Figure I)</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/places-to-be" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1985</span>
-            <strong>Location:</strong> <span>Peterborough, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Places to Be (Figure I)</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/places-to-be" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1985<br>
+            <strong>Location:</strong> Peterborough, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([52.57241425, -0.2424552752], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Places to Be (Figure II)", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Places to Be (Figure II)</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/places-to-be" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1985</span>
-            <strong>Location:</strong> <span>Peterborough, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Places to Be (Figure II)</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/places-to-be" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1985<br>
+            <strong>Location:</strong> Peterborough, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([52.57330103, -0.2436890913], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Places to Be (Figure III)", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Places to Be (Figure III)</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/places-to-be" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1985</span>
-            <strong>Location:</strong> <span>Peterborough, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Places to Be (Figure III)</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/places-to-be" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1985<br>
+            <strong>Location:</strong> Peterborough, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.5299996, -0.1280864], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Planets", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Planets</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/planets" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2002</span>
-            <strong>Location:</strong> <span>The British Library, London, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Planets</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/planets" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2002<br>
+            <strong>Location:</strong> The British Library, London, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([52.2027, 0.1219], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Plant", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Plant</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/plant" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2002</span>
-            <strong>Location:</strong> <span>McDonald Institute for Archaeological Research, Cambridge, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Plant</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/plant" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2002<br>
+            <strong>Location:</strong> McDonald Institute for Archaeological Research, Cambridge, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.5018139, 0.0091839], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Quantum Cloud", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Quantum Cloud</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/quantum-cloud" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2000</span>
-            <strong>Location:</strong> <span>River Thames, Greenwich Peninsula, London, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Quantum Cloud</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/quantum-cloud" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2000<br>
+            <strong>Location:</strong> River Thames, Greenwich Peninsula, London, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "1" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.5244224, -0.1440789], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Reflection", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Reflection</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/reflection" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2001</span>
-            <strong>Location:</strong> <span>Regent’s Place, London, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Reflection</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/reflection" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2001<br>
+            <strong>Location:</strong> Regent’s Place, London, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.51584628, -0.106283141], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Resolution", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Resolution</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.ianvisits.co.uk/articles/public-street-art-antony-gormleys-resolution-38380/" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2007</span>
-            <strong>Location:</strong> <span>City of London, London, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Resolution</h3>
+          <p style="font-size: 12px;"><a href="https://www.ianvisits.co.uk/articles/public-street-art-antony-gormleys-resolution-38380/" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2007<br>
+            <strong>Location:</strong> City of London, London, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([38.7672471, -9.094888], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Rhizome II", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Rhizome II</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/rhizome-ii" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1998</span>
-            <strong>Location:</strong> <span>Parque Das Nacoes, Lisbon, Portugal</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Rhizome II</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/rhizome-ii" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1998<br>
+            <strong>Location:</strong> Parque Das Nacoes, Lisbon, Portugal
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.5128465, -0.1523666], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Room", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Room</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/room" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2014</span>
-            <strong>Location:</strong> <span>Beaumont Hotel, London, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Room</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/room" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2014<br>
+            <strong>Location:</strong> Beaumont Hotel, London, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([37.4005, 25.2682], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Rule II", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Rule II</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/rule-ii" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2019</span>
-            <strong>Location:</strong> <span>Archaeological Museum of Delos, Delos, Greece</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Rule II</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/rule-ii" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2019<br>
+            <strong>Location:</strong> Archaeological Museum of Delos, Delos, Greece
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([54.9955757, -7.3191791], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Sculpture for Derry Walls", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Sculpture for Derry Walls</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/sculpture-for-derry-walls" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1987</span>
-            <strong>Location:</strong> <span> St Augustine’s and Bogside, Derry, Northern Ireland</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Sculpture for Derry Walls</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/sculpture-for-derry-walls" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1987<br>
+            <strong>Location:</strong>  St Augustine’s and Bogside, Derry, Northern Ireland
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([38.91728, 16.58325], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Seven Times", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Seven Times</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/seven-times" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2006</span>
-            <strong>Location:</strong> <span>International Sculpture Park, Catanzaro, Calabria, Italy</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Seven Times</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/seven-times" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2006<br>
+            <strong>Location:</strong> International Sculpture Park, Catanzaro, Calabria, Italy
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([22.287191, 114.210539], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Shelf II", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Shelf II</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/shelf-ii" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2020</span>
-            <strong>Location:</strong> <span>Taikoo Place, Hong Kong</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Shelf II</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/shelf-ii" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2020<br>
+            <strong>Location:</strong> Taikoo Place, Hong Kong
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([45.037533, 6.284781], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Site", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Site</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/site" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2020</span>
-            <strong>Location:</strong> <span>La Grave, La Meije, France</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Site</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/site" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2020<br>
+            <strong>Location:</strong> La Grave, La Meije, France
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.0606892, -1.3131538], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Sound II", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Sound II</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/sound-ii" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1986</span>
-            <strong>Location:</strong> <span>Winchester Cathedral, Winchester, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Sound II</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/sound-ii" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1986<br>
+            <strong>Location:</strong> Winchester Cathedral, Winchester, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([61.1122823, 10.4387637], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Standing Matter XVII", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Standing Matter XVII</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/standing-matter-xvii" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2008</span>
-            <strong>Location:</strong> <span>Lilllehammer, Norway</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Standing Matter XVII</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/standing-matter-xvii" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2008<br>
+            <strong>Location:</strong> Lilllehammer, Norway
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([-43.5282527, 172.6287084], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Stay", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Stay</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/stay" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2014</span>
-            <strong>Location:</strong> <span>Avon River, Christchurch, New Zealand</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Stay</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/stay" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2014<br>
+            <strong>Location:</strong> Avon River, Christchurch, New Zealand
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([-43.5307273, 172.6287776], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Stay", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Stay</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/stay-ii" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2014</span>
-            <strong>Location:</strong> <span>Arts Centre, Christchurch, New Zealand</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Stay</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/stay-ii" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2014<br>
+            <strong>Location:</strong> Arts Centre, Christchurch, New Zealand
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([52.5183242, 13.3788813], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Steht Und F\u00e4llt", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Steht Und Fällt</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/steht-und-faellt" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2001</span>
-            <strong>Location:</strong> <span>Dorotheenblocke, Berlin, Germany</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Steht Und Fällt</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/steht-und-faellt" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2001<br>
+            <strong>Location:</strong> Dorotheenblocke, Berlin, Germany
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([50.5507395, -2.4465833], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Still Falling", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Still Falling</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/still-falling" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1983</span>
-            <strong>Location:</strong> <span>Tout Quarry Sculpture Park, Dorset, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Still Falling</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/still-falling" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1983<br>
+            <strong>Location:</strong> Tout Quarry Sculpture Park, Dorset, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.2797971, 1.0827998], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Transport", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Transport</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/transport" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2010</span>
-            <strong>Location:</strong> <span>Canterbury Cathedral, Canterbury, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Transport</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/transport" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2010<br>
+            <strong>Location:</strong> Canterbury Cathedral, Canterbury, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([52.203849, 0.115856], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("True, for Alan Turing", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">True, for Alan Turing</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/true-for-alan-turing" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2024</span>
-            <strong>Location:</strong> <span>King’s College, Cambridge, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">True, for Alan Turing</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/true-for-alan-turing" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2024<br>
+            <strong>Location:</strong> King’s College, Cambridge, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.2801057, 0.5179559], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Two Stones", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Two Stones</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/two-stones" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1979</span>
-            <strong>Location:</strong> <span>Kent History and Library Centre, Maidstone, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Two Stones</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/two-stones" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1979<br>
+            <strong>Location:</strong> Kent History and Library Centre, Maidstone, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.5485714, -0.1985727], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Untitled [Listening]", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Untitled [Listening]</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/untitled-listening" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>1985</span>
-            <strong>Location:</strong> <span>Maygrove Peace Park, London, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Untitled [Listening]</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/untitled-listening" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 1985<br>
+            <strong>Location:</strong> Maygrove Peace Park, London, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.5299996, -0.1275392], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Witness", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Witness</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/witness" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2011</span>
-            <strong>Location:</strong> <span>British Library, London, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Witness</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/witness" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2011<br>
+            <strong>Location:</strong> British Library, London, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([48.8609973, 2.3296885], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Witness VII", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Witness VII</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/witness-vii" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2021</span>
-            <strong>Location:</strong> <span>Ecole du Louvre, Paris, France</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Witness VII</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/witness-vii" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2021<br>
+            <strong>Location:</strong> Ecole du Louvre, Paris, France
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([48.8610044, 2.3311208], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Witness VIII", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Witness VIII</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/witness-viii" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2021</span>
-            <strong>Location:</strong> <span>Ecole du Louvre, Paris, France</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Witness VIII</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/witness-viii" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2021<br>
+            <strong>Location:</strong> Ecole du Louvre, Paris, France
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([53.693127, -1.6599717], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("Work", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">Work</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/work" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2010</span>
-            <strong>Location:</strong> <span>Kirklees College, Dewsbury, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">Work</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/work" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2010<br>
+            <strong>Location:</strong> Kirklees College, Dewsbury, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
     (function() {
       var iconType = "1" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.543447, -0.1521035], { icon: iconType }).addTo(map);
 
-      // Tooltip logic
-      if (window.matchMedia('(hover: hover)').matches) {
-        marker.bindTooltip("You", {
-          permanent: false,
-          direction: 'top',
-          offset: [-10, -4]
-        });
-      }
-
-      // Popup content
-      const popupContent = `
-        <div style="max-width: 250px;">
-          <h3 style="margin: 0; text-align: center;">You</h3>
-          <p style="margin: 0; font-size: 12px; text-align: center;">
-            <a href="https://www.antonygormley.com/works/sculpture/permanent/you" target="_blank">sculpture page</a>
-          </p>
-          <br>
-          <div style="display: grid; grid-template-columns: max-content 1fr; row-gap: 4px; column-gap: 8px; font-size: 13px; margin-left: 10px;">
-            <strong>Year:</strong> <span>2005</span>
-            <strong>Location:</strong> <span>The Roundhouse, London, England</span>
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin: 0;">You</h3>
+          <p style="font-size: 12px;"><a href="https://www.antonygormley.com/works/sculpture/permanent/you" target="_blank">View Sculpture</a></p>
+          <hr>
+          <div style="font-size: 13px; text-align: left;">
+            <strong>Year:</strong> 2005<br>
+            <strong>Location:</strong> The Roundhouse, London, England
           </div>
-        </div>`;
-
-      // bindPopup automatically uses the popupAnchor defined in the icon
-      marker.bindPopup(popupContent);
+        </div>
+      `);
     })();
     
 
     async function goToLocation(lat, lng) {
-      const coords = [lat, lng - 0.002];
+      const coords = [lat, lng];
       map.setView(coords, 13);
 
       await new Promise(resolve => setTimeout(resolve, 500));
 
       const circle = L.circle(coords, {
         color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.3,
+        fillOpacity: 0,
         radius: 150
       }).addTo(map);
 
@@ -3238,41 +2238,17 @@
       map.removeLayer(circle);
     }
 
-    // Search filter logic
+    // Search Logic
     const searchInput = document.getElementById('searchInput');
     const rows = document.querySelectorAll('#sidebar-table tbody tr');
+    
     searchInput.addEventListener('input', function() {
       const filter = searchInput.value.toLowerCase();
       rows.forEach(row => {
-        const nameText = row.cells[0].textContent.toLowerCase();
-        row.style.display = nameText.includes(filter) ? '' : 'none';
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(filter) ? '' : 'none';
       });
     });
-
-    // Toggle sidebar on button click
-    const sidebar = document.getElementById("sidebar-layer");
-    const toggleBtn = document.getElementById("toggleSidebar");
-
-
-    toggleBtn.addEventListener("click", () => {
-        sidebar.classList.toggle("collapsed");
-
-        if (sidebar.classList.contains("collapsed")) {
-            toggleBtn.style.left = "10px";
-            setTimeout(() => {
-                toggleBtn.textContent = "Show table";
-                }, 100);
-        } else {
-            toggleBtn.style.left = "115px";
-            setTimeout(() => {
-                toggleBtn.textContent = "Hide"
-                }, 100);}
-    });
-
-
-
-
   </script>
 </body>
-
 </html>
