@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>emilyGormleyBagger</title>
+  <title>GormleyBagger</title>
   <link rel="icon" href='https://github.com/mprallison/gormley-bagger/blob/main/static/images/gap.png?raw=true' type="image/png" sizes="48x48">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -99,6 +99,10 @@
       font-size: 12px;
     }
 
+    #searchInput::placeholder {
+    text-align: right;
+    }
+
     .leaflet-popup-content-wrapper {
       background: rgba(255, 255, 255, 0.9) !important;
     }
@@ -114,7 +118,7 @@
         <tr>
           <th style="text-align: left;">
             <span style="font-size: 12px;">Title</span><br>
-            <input type="text" id="searchInput" placeholder="🔍 Search...">
+            <input type="text" id="searchInput" placeholder="🔍">
             <hr>
           </th>
         </tr>
@@ -177,7 +181,7 @@
         
         <tr>
           <td>
-            <button style="" 
+            <button style="background-color: #93C572;" 
                     onclick="goToLocation(51.756083, -1.25525)">
               A Door for the Stuart Gates
             </button>
@@ -258,7 +262,7 @@
         
         <tr>
           <td>
-            <button style="" 
+            <button style="background-color: #93C572;" 
                     onclick="goToLocation(51.75425558, -1.256482826)">
               Another Time XI
             </button>
@@ -268,7 +272,7 @@
         <tr>
           <td>
             <button style="" 
-                    onclick="goToLocation(51.5089923, -0.03449)">
+                    onclick="goToLocation(51.50857033713539,  -0.03390362306418632)">
               Another Time XVI
             </button>
           </td>
@@ -457,7 +461,7 @@
         <tr>
           <td>
             <button style="" 
-                    onclick="goToLocation(52.4789949, -1.904861)">
+                    onclick="goToLocation(52.4795215, -1.9033334,29)">
               Iron:Man
             </button>
           </td>
@@ -610,6 +614,15 @@
         <tr>
           <td>
             <button style="background-color: #93C572;" 
+                    onclick="goToLocation(51.757430297733585,  -1.252840060949032)">
+              Present Time
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button style="background-color: #93C572;" 
                     onclick="goToLocation(51.5018139, 0.0091839)">
               Quantum Cloud
             </button>
@@ -628,7 +641,7 @@
         <tr>
           <td>
             <button style="" 
-                    onclick="goToLocation(51.51584628, -0.106283141)">
+                    onclick="goToLocation(51.5155815, -0.1062941)">
               Resolution
             </button>
           </td>
@@ -1036,7 +1049,7 @@
     })();
     
     (function() {
-      var iconType = "" === '1' ? bagIcon : gapIcon;
+      var iconType = "1" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.756083, -1.25525], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
@@ -1270,7 +1283,7 @@
     })();
     
     (function() {
-      var iconType = "" === '1' ? bagIcon : gapIcon;
+      var iconType = "1" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.75425558, -1.256482826], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
@@ -1297,7 +1310,7 @@
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
-      var marker = L.marker([51.5089923, -0.03449], { icon: iconType }).addTo(map);
+      var marker = L.marker([51.50857033713539,  -0.03390362306418632], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
         <div style="text-align: center;">
@@ -1843,7 +1856,7 @@
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
-      var marker = L.marker([52.4789949, -1.904861], { icon: iconType }).addTo(map);
+      var marker = L.marker([52.4795215, -1.9033334,29], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
         <div style="text-align: center;">
@@ -2285,6 +2298,32 @@
     
     (function() {
       var iconType = "1" === '1' ? bagIcon : gapIcon;
+      var marker = L.marker([51.757430297733585,  -1.252840060949032], { icon: iconType }).addTo(map);
+
+      marker.bindPopup(`
+        <div style="text-align: center;">
+          <h3 style="margin-bottom: 0;">Present Time</h3>
+          <p style="font-size: 12px; margin-top:0"><a href="https://www.mansfield.ox.ac.uk/antony-gormley/" target="_blank">Sculpture link</a></p>
+          <hr>
+          <div style="display: grid;
+                    text-align: left;
+
+                grid-template-columns: max-content 1fr;
+                row-gap: 4px;
+                column-gap: 10px;
+                font-size: 13px;
+                ">
+            <strong>Year:</strong>
+            <span>1988</span>
+            <strong>Location:</strong>
+            <span>Mansfield College, Oxford University, Oxford, England</span>
+          </div>
+        </div>
+      `);
+    })();
+    
+    (function() {
+      var iconType = "1" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.5018139, 0.0091839], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
@@ -2337,7 +2376,7 @@
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
-      var marker = L.marker([51.51584628, -0.106283141], { icon: iconType }).addTo(map);
+      var marker = L.marker([51.5155815, -0.1062941], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
         <div style="text-align: center;">
@@ -2667,7 +2706,7 @@
             <strong>Year:</strong>
             <span>2001</span>
             <strong>Location:</strong>
-            <span>Dorotheenblocke, Berlin, Germany</span>
+            <span>Jakob-Kaiser-Haus, Dorotheenblocke, Berlin, Germany</span>
           </div>
         </div>
       `);

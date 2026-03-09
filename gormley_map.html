@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>gormleyBagger</title>
+  <title>GormleyBagger</title>
   <link rel="icon" href='https://github.com/mprallison/gormley-bagger/blob/main/static/images/gap.png?raw=true' type="image/png" sizes="48x48">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -99,6 +99,10 @@
       font-size: 12px;
     }
 
+    #searchInput::placeholder {
+    text-align: right;
+    }
+
     .leaflet-popup-content-wrapper {
       background: rgba(255, 255, 255, 0.9) !important;
     }
@@ -114,7 +118,7 @@
         <tr>
           <th style="text-align: left;">
             <span style="font-size: 12px;">Title</span><br>
-            <input type="text" id="searchInput" placeholder="🔍 Search...">
+            <input type="text" id="searchInput" placeholder="🔍">
             <hr>
           </th>
         </tr>
@@ -268,7 +272,7 @@
         <tr>
           <td>
             <button style="" 
-                    onclick="goToLocation(51.5089923, -0.03449)">
+                    onclick="goToLocation(51.50857033713539,  -0.03390362306418632)">
               Another Time XVI
             </button>
           </td>
@@ -457,7 +461,7 @@
         <tr>
           <td>
             <button style="" 
-                    onclick="goToLocation(52.4789949, -1.904861)">
+                    onclick="goToLocation(52.4795215, -1.9033334,29)">
               Iron:Man
             </button>
           </td>
@@ -610,6 +614,15 @@
         <tr>
           <td>
             <button style="" 
+                    onclick="goToLocation(51.757430297733585,  -1.252840060949032)">
+              Present Time
+            </button>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <button style="" 
                     onclick="goToLocation(51.5018139, 0.0091839)">
               Quantum Cloud
             </button>
@@ -628,7 +641,7 @@
         <tr>
           <td>
             <button style="" 
-                    onclick="goToLocation(51.51584628, -0.106283141)">
+                    onclick="goToLocation(51.5155815, -0.1062941)">
               Resolution
             </button>
           </td>
@@ -884,7 +897,7 @@
       var marker = L.marker([55.95008363, -3.228595934], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">6 Times (Figure II)</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">Sculpture link</a></p>
           <hr>
@@ -910,7 +923,7 @@
       var marker = L.marker([55.95118355, -3.225297946], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">6 Times (Figure I)</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">Sculpture link</a></p>
           <hr>
@@ -936,7 +949,7 @@
       var marker = L.marker([55.95819491, -3.208878658], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">6 Times (Figure III)</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">Sculpture link</a></p>
           <hr>
@@ -962,7 +975,7 @@
       var marker = L.marker([55.96759562, -3.194258808], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">6 Times (Figure IV)</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">Sculpture link</a></p>
           <hr>
@@ -988,7 +1001,7 @@
       var marker = L.marker([55.97192991, -3.183396928], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">6 Times (Figure V)</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1014,7 +1027,7 @@
       var marker = L.marker([55.98427299, -3.176415874], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">6 Times (Figure VI)</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/6-times" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1040,7 +1053,7 @@
       var marker = L.marker([51.756083, -1.25525], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">A Door for the Stuart Gates</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/a-door-for-the-stuart-gates" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1066,7 +1079,7 @@
       var marker = L.marker([55.673426, 14.241283], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">A Sculpture for the Subjective Experience of Architecture</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/a-sculpture-for-subjective-experience-of-architecture" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1092,7 +1105,7 @@
       var marker = L.marker([51.498922, -0.174722], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Alert</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/alert-2022" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1118,7 +1131,7 @@
       var marker = L.marker([24.660726, -100.4203], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Allotment III</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/allotment-iii" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1144,7 +1157,7 @@
       var marker = L.marker([54.9141254, -1.5916828], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Angel of the North</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/angel-of-the-north" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1170,7 +1183,7 @@
       var marker = L.marker([53.4909747, -3.0605476], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Another Place</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/another-place" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1196,7 +1209,7 @@
       var marker = L.marker([37.07268, 138.77664], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Another Singularity</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/another-singularity-japan" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1222,7 +1235,7 @@
       var marker = L.marker([51.39238923, 1.381614513], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Another Time</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://turnercontemporary.org/whats-on/exhibitions/another-time" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1248,7 +1261,7 @@
       var marker = L.marker([56.4624148, -3.0428533], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Another Time X</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/another-time-x" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1274,7 +1287,7 @@
       var marker = L.marker([51.75425558, -1.256482826], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Another Time XI</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/another-time-xi" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1297,10 +1310,10 @@
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
-      var marker = L.marker([51.5089923, -0.03449], { icon: iconType }).addTo(map);
+      var marker = L.marker([51.50857033713539,  -0.03390362306418632], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Another Time XVI</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/another-time-xvi" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1326,7 +1339,7 @@
       var marker = L.marker([51.07673068, 1.191638036], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Another Time XVIII</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.creativefolkestone.org.uk/artists/antony-gormley-artworks/" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1352,7 +1365,7 @@
       var marker = L.marker([33.6277222, 131.6034167], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Another Time XX</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/another-time-xx" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1378,7 +1391,7 @@
       var marker = L.marker([48.1323, 11.5983369], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Bare V</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/bare-v" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1404,7 +1417,7 @@
       var marker = L.marker([34.840583, 128.429818], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Bearing III</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/bearing-iii" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1430,7 +1443,7 @@
       var marker = L.marker([58.9704986, 5.7303649], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Broken Column</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/broken-column" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1456,7 +1469,7 @@
       var marker = L.marker([42.3631626, -71.0926482], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Chord</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/chord" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1482,7 +1495,7 @@
       var marker = L.marker([48.8599697, 2.3572959], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Cloud Chain</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/cloud-chain" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1508,7 +1521,7 @@
       var marker = L.marker([51.5047889, -0.2003235], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Connect</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/connect" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1534,7 +1547,7 @@
       var marker = L.marker([1.2846547, 103.8609937], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Drift</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/drift" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1560,7 +1573,7 @@
       var marker = L.marker([52.521953, 5.4253192], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Exposure</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/exposure" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1586,7 +1599,7 @@
       var marker = L.marker([43.4685584, 11.1376636], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Fai Spazio, Prendi Posto (Making Space, Taking Place)</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/fai-spazio-prendi-posto-making-space-taking-place" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1612,7 +1625,7 @@
       var marker = L.marker([51.526033, -0.134058], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Feel</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/feel" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1638,7 +1651,7 @@
       var marker = L.marker([55.900743, -3.421232], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Firmament</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/firmament" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1664,7 +1677,7 @@
       var marker = L.marker([55.5268525, -5.5014542], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Grip</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/grip" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1690,7 +1703,7 @@
       var marker = L.marker([37.4191229, 127.8232613], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Ground</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/ground" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1716,7 +1729,7 @@
       var marker = L.marker([61.2163051, -149.8884068], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Habitat</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/habitat" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1742,7 +1755,7 @@
       var marker = L.marker([66.3101601, 14.1274651], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Havmann</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/havmann" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1768,7 +1781,7 @@
       var marker = L.marker([56.199503, 12.557791], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Here and Here</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/here-and-here" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1794,7 +1807,7 @@
       var marker = L.marker([34.1751492, 135.4602919], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Here and There</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/here-and-there" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1820,7 +1833,7 @@
       var marker = L.marker([-29.4611752, 120.749213], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Inside Australia</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/inside-australia" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1843,10 +1856,10 @@
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
-      var marker = L.marker([52.4789949, -1.904861], { icon: iconType }).addTo(map);
+      var marker = L.marker([52.4795215, -1.9033334,29], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Iron:Man</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/iron-man" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1872,7 +1885,7 @@
       var marker = L.marker([51.052639, 13.736667], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Learning to See III and Under My Skin</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/news/learning-to-see-iii-and-under-my-skin-now-on-permanent-display-at-staatliche-kunstsammlungen" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1898,7 +1911,7 @@
       var marker = L.marker([52.208466, 0.124341], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Learning to See VI</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/learning-to-see" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1924,7 +1937,7 @@
       var marker = L.marker([50.36307493, -4.147002014], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Look II</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/look-ii" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1950,7 +1963,7 @@
       var marker = L.marker([51.6058236, -0.4831649], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Making Space</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/making-space" target="_blank">Sculpture link</a></p>
           <hr>
@@ -1976,7 +1989,7 @@
       var marker = L.marker([37.3695, 138.8965], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Man:Rock V</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/man-rock-v" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2002,7 +2015,7 @@
       var marker = L.marker([48.1394124, 11.5689943], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Mark II</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/mark-ii" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2028,7 +2041,7 @@
       var marker = L.marker([34.699087, 135.491727], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Mind-Body Column</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/mind-body-column" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2054,7 +2067,7 @@
       var marker = L.marker([48.1033938, -1.6878374], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Open Space</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/open-space" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2080,7 +2093,7 @@
       var marker = L.marker([51.3168624, 9.5000296], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Out of the Dark</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/out-of-the-dark" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2106,7 +2119,7 @@
       var marker = L.marker([49.6313504, 3.1787161], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Passage</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/passage" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2132,7 +2145,7 @@
       var marker = L.marker([59.9043812, 10.7375367], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Place of Remembrance</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/place-of-remembrance" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2158,7 +2171,7 @@
       var marker = L.marker([52.57274679, -0.2448478056], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Places to Be (Figure I)</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/places-to-be" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2184,7 +2197,7 @@
       var marker = L.marker([52.57241425, -0.2424552752], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Places to Be (Figure II)</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/places-to-be" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2210,7 +2223,7 @@
       var marker = L.marker([52.57330103, -0.2436890913], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Places to Be (Figure III)</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/places-to-be" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2236,7 +2249,7 @@
       var marker = L.marker([51.5299996, -0.1280864], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Planets</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/planets" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2262,7 +2275,7 @@
       var marker = L.marker([52.2027, 0.1219], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Plant</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/plant" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2285,10 +2298,36 @@
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
+      var marker = L.marker([51.757430297733585,  -1.252840060949032], { icon: iconType }).addTo(map);
+
+      marker.bindPopup(`
+        <div style="text-align: center; maxWidth: 60vh,">
+          <h3 style="margin-bottom: 0;">Present Time</h3>
+          <p style="font-size: 12px; margin-top:0"><a href="https://www.mansfield.ox.ac.uk/antony-gormley/" target="_blank">Sculpture link</a></p>
+          <hr>
+          <div style="display: grid;
+                    text-align: left;
+
+                grid-template-columns: max-content 1fr;
+                row-gap: 4px;
+                column-gap: 10px;
+                font-size: 13px;
+                ">
+            <strong>Year:</strong>
+            <span>1988</span>
+            <strong>Location:</strong>
+            <span>Mansfield College, Oxford University, Oxford, England</span>
+          </div>
+        </div>
+      `);
+    })();
+    
+    (function() {
+      var iconType = "" === '1' ? bagIcon : gapIcon;
       var marker = L.marker([51.5018139, 0.0091839], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Quantum Cloud</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/quantum-cloud" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2314,7 +2353,7 @@
       var marker = L.marker([51.5244224, -0.1440789], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Reflection</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/reflection" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2337,10 +2376,10 @@
     
     (function() {
       var iconType = "" === '1' ? bagIcon : gapIcon;
-      var marker = L.marker([51.51584628, -0.106283141], { icon: iconType }).addTo(map);
+      var marker = L.marker([51.5155815, -0.1062941], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Resolution</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.ianvisits.co.uk/articles/public-street-art-antony-gormleys-resolution-38380/" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2366,7 +2405,7 @@
       var marker = L.marker([38.7672471, -9.094888], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Rhizome II</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/rhizome-ii" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2392,7 +2431,7 @@
       var marker = L.marker([51.5128465, -0.1523666], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Room</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/room" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2418,7 +2457,7 @@
       var marker = L.marker([37.4005, 25.2682], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Rule II</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/rule-ii" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2444,7 +2483,7 @@
       var marker = L.marker([54.9955757, -7.3191791], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Sculpture for Derry Walls</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/sculpture-for-derry-walls" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2470,7 +2509,7 @@
       var marker = L.marker([38.91728, 16.58325], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Seven Times</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/seven-times" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2496,7 +2535,7 @@
       var marker = L.marker([22.287191, 114.210539], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Shelf II</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/shelf-ii" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2522,7 +2561,7 @@
       var marker = L.marker([45.037533, 6.284781], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Site</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/site" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2548,7 +2587,7 @@
       var marker = L.marker([51.0606892, -1.3131538], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Sound II</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/sound-ii" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2574,7 +2613,7 @@
       var marker = L.marker([61.1122823, 10.4387637], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Standing Matter XVII</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/standing-matter-xvii" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2600,7 +2639,7 @@
       var marker = L.marker([-43.5282527, 172.6287084], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Stay</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/stay" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2626,7 +2665,7 @@
       var marker = L.marker([-43.5307273, 172.6287776], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Stay</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/stay-ii" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2652,7 +2691,7 @@
       var marker = L.marker([52.5183242, 13.3788813], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Steht Und Fällt</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/steht-und-faellt" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2667,7 +2706,7 @@
             <strong>Year:</strong>
             <span>2001</span>
             <strong>Location:</strong>
-            <span>Dorotheenblocke, Berlin, Germany</span>
+            <span>Jakob-Kaiser-Haus, Dorotheenblocke, Berlin, Germany</span>
           </div>
         </div>
       `);
@@ -2678,7 +2717,7 @@
       var marker = L.marker([50.5507395, -2.4465833], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Still Falling</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/still-falling" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2704,7 +2743,7 @@
       var marker = L.marker([51.2797971, 1.0827998], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Transport</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/transport" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2730,7 +2769,7 @@
       var marker = L.marker([52.203849, 0.115856], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">True, for Alan Turing</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/true-for-alan-turing" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2756,7 +2795,7 @@
       var marker = L.marker([51.2801057, 0.5179559], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Two Stones</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/two-stones" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2782,7 +2821,7 @@
       var marker = L.marker([51.5485714, -0.1985727], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Untitled [Listening]</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/untitled-listening" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2808,7 +2847,7 @@
       var marker = L.marker([51.5299996, -0.1275392], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Witness</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/witness" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2834,7 +2873,7 @@
       var marker = L.marker([48.8609973, 2.3296885], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Witness VII</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/witness-vii" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2860,7 +2899,7 @@
       var marker = L.marker([48.8610044, 2.3311208], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Witness VIII</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/witness-viii" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2886,7 +2925,7 @@
       var marker = L.marker([53.693127, -1.6599717], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">Work</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/work" target="_blank">Sculpture link</a></p>
           <hr>
@@ -2912,7 +2951,7 @@
       var marker = L.marker([51.543447, -0.1521035], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">You</h3>
           <p style="font-size: 12px; margin-top:0"><a href="https://www.antonygormley.com/works/sculpture/permanent/you" target="_blank">Sculpture link</a></p>
           <hr>

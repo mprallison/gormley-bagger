@@ -99,6 +99,10 @@
       font-size: 12px;
     }
 
+    #searchInput::placeholder {
+    text-align: right;
+    }
+
     .leaflet-popup-content-wrapper {
       background: rgba(255, 255, 255, 0.9) !important;
     }
@@ -114,7 +118,7 @@
         <tr>
           <th style="text-align: left;">
             <span style="font-size: 12px;">Title</span><br>
-            <input type="text" id="searchInput" placeholder="🔍 Search...">
+            <input type="text" id="searchInput" placeholder="🔍">
             <hr>
           </th>
         </tr>
@@ -182,7 +186,7 @@
       var marker = L.marker([{{ loc.latitude }}, {{ loc.longitude }}], { icon: iconType }).addTo(map);
 
       marker.bindPopup(`
-        <div style="text-align: center;">
+        <div style="text-align: center; maxWidth: 60vh,">
           <h3 style="margin-bottom: 0;">{{ loc.name }}</h3>
           <p style="font-size: 12px; margin-top:0"><a href="{{ loc.url }}" target="_blank">Sculpture link</a></p>
           <hr>
