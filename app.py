@@ -1,12 +1,13 @@
 from jinja2 import Environment, FileSystemLoader
 import csv
+import sys
 
 env = Environment(loader=FileSystemLoader("templates"))
 
 data_file = "data.csv"
-user = "matthew"
+user = sys.argv[1]
 title = "GormleyBagger"
-filename = "gormley_map.html"
+filename = f"gormley_map_{user}.html"
 
 #read gormley data and user field
 #rename user field "status"
