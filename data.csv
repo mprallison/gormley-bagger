@@ -27,7 +27,7 @@ id,name,year,location,latitude,longitude,url,matthew,emily
 25,Drift,2009,"Marina Bay Sands, Singapore",1.2846547,103.8609937,https://www.antonygormley.com/works/sculpture/permanent/drift,
 26,Exposure,2010,"Lelystad, the Netherlands",52.521953,5.4253192,https://www.antonygormley.com/works/sculpture/permanent/exposure,,
 27,"Fai Spazio, Prendi Posto (Making Space, Taking Place)",2004,"Poggibonsi, Italy",43.4685584,11.1376636,https://www.antonygormley.com/works/sculpture/permanent/fai-spazio-prendi-posto-making-space-taking-place,,
-28,Feel,2001,"Wellcome Collection, London, England",51.526033,-0.134058,https://www.antonygormley.com/works/sculpture/permanent/feel,1,
+28,Feel,2001,"Wellcome Collection, London, England",51.526033,-0.134058,https://www.antonygormley.com/works/sculpture/permanent/feel,1,1
 29,Firmament,2008,"Jupiter Artland, Edinburgh, Scotland",55.900743,-3.421232,https://www.antonygormley.com/works/sculpture/permanent/firmament,,1
 30,Grip,2014,"Saddell Bay, Mull of Kintyre, Scotland",55.5268525,-5.5014542,https://www.antonygormley.com/works/sculpture/permanent/grip,,
 31,Ground,2025,"Museum SAN, Wonju, South Korea",37.4191229,127.8232613,https://www.antonygormley.com/works/sculpture/permanent/ground,,
@@ -51,14 +51,14 @@ id,name,year,location,latitude,longitude,url,matthew,emily
 49,Places to Be (Figure I),1985,"Peterborough, England",52.57274679,-0.2448478056,https://www.antonygormley.com/works/sculpture/permanent/places-to-be,,
 50,Places to Be (Figure II),1985,"Peterborough, England",52.57241425,-0.2424552752,https://www.antonygormley.com/works/sculpture/permanent/places-to-be,,
 51,Places to Be (Figure III),1985,"Peterborough, England",52.57330103,-0.2436890913,https://www.antonygormley.com/works/sculpture/permanent/places-to-be,,
-52,Planets,2002,"The British Library, London, England",51.5299996,-0.1280864,https://www.antonygormley.com/works/sculpture/permanent/planets,,
+52,Planets,2002,"The British Library, London, England",51.5299996,-0.1280864,https://www.antonygormley.com/works/sculpture/permanent/planets,1,1
 53,Plant,2002,"McDonald Institute for Archaeological Research, Cambridge, England",52.2027,0.1219,https://www.antonygormley.com/works/sculpture/permanent/plant,,
 54,Present Time,1988,"Mansfield College, Oxford University, Oxford, England",51.757430297733585, -1.252840060949032,https://www.mansfield.ox.ac.uk/antony-gormley/,1,1
 55,Quantum Cloud,2000,"River Thames, Greenwich Peninsula, London, England",51.5018139,0.0091839,https://www.antonygormley.com/works/sculpture/permanent/quantum-cloud,1,1
-56,Reflection,2001,"Regent’s Place, London, England",51.5244224,-0.1440789,https://www.antonygormley.com/works/sculpture/permanent/reflection,1,
+56,Reflection,2001,"Regent’s Place, London, England",51.5244224,-0.1440789,https://www.antonygormley.com/works/sculpture/permanent/reflection,1,1
 57,Resolution,2007,"City of London, London, England",51.5155815,-0.1062941,https://www.ianvisits.co.uk/articles/public-street-art-antony-gormleys-resolution-38380/,,
 58,Rhizome II,1998,"Parque Das Nacoes, Lisbon, Portugal",38.7672471,-9.094888,https://www.antonygormley.com/works/sculpture/permanent/rhizome-ii,,
-59,Room,2014,"Beaumont Hotel, London, England",51.5128465,-0.1523666,https://www.antonygormley.com/works/sculpture/permanent/room,,
+59,Room,2014,"Beaumont Hotel, London, England",51.5128465,-0.1523666,https://www.antonygormley.com/works/sculpture/permanent/room,1,1
 60,Rule II,2019,"Archaeological Museum of Delos, Delos, Greece",37.4005,25.2682,https://www.antonygormley.com/works/sculpture/permanent/rule-ii,,
 61,Sculpture for Derry Walls,1987," St Augustine’s and Bogside, Derry, Northern Ireland",54.9955757,-7.3191791,https://www.antonygormley.com/works/sculpture/permanent/sculpture-for-derry-walls,,
 62,Seven Times,2006,"International Sculpture Park, Catanzaro, Calabria, Italy",38.91728,16.58325,https://www.antonygormley.com/works/sculpture/permanent/seven-times,,
@@ -74,7 +74,7 @@ id,name,year,location,latitude,longitude,url,matthew,emily
 72,"True, for Alan Turing",2024,"King’s College, Cambridge, England",52.203849,0.115856,https://www.antonygormley.com/works/sculpture/permanent/true-for-alan-turing,,
 73,Two Stones,1979,"Kent History and Library Centre, Maidstone, England",51.2801057,0.5179559,https://www.antonygormley.com/works/sculpture/permanent/two-stones,,
 74,Untitled [Listening],1985,"Maygrove Peace Park, London, England",51.5485714,-0.1985727,https://www.antonygormley.com/works/sculpture/permanent/untitled-listening,,
-75,Witness,2011,"British Library, London, England",51.5299996,-0.1275392,https://www.antonygormley.com/works/sculpture/permanent/witness,,1
+75,Witness,2011,"British Library, London, England",51.5299996,-0.1275392,https://www.antonygormley.com/works/sculpture/permanent/witness,1,1
 76,Witness VII,2021,"Ecole du Louvre, Paris, France",48.8609973,2.3296885,https://www.antonygormley.com/works/sculpture/permanent/witness-vii,,
 77,Witness VIII,2021,"Ecole du Louvre, Paris, France",48.8610044,2.3311208,https://www.antonygormley.com/works/sculpture/permanent/witness-viii,,
 78,Work,2010,"Kirklees College, Dewsbury, England",53.693127,-1.6599717,https://www.antonygormley.com/works/sculpture/permanent/work,,
